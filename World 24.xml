@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <chunks>
+    <chunkInfo>
+      <x>465</x>
+      <y>25.5014172</y>
+      <z>-375</z>
+      <time>0</time>
+      <chunkType>2</chunkType>
+      <itemsToRemove>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>457.6</x>
+          <y>25.6</y>
+          <z>-372.3</z>
+          <id>7</id>
+        </spawnedEnviornmentInfo>
+      </itemsToRemove>
+      <itemsToAdd />
+    </chunkInfo>
+  </chunks>
+</saveInfo>

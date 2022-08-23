@@ -1,0 +1,372 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3086092308555974512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3086092308555974525}
+  - component: {fileID: 3086092308555974515}
+  - component: {fileID: 3086092308555974524}
+  - component: {fileID: 3086092308555974514}
+  - component: {fileID: -3459656097654691157}
+  m_Layer: 0
+  m_Name: worldGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3086092308555974525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086092308555974512}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 200.96437, y: 390.71503, z: 274.89236}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3086092308555974515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086092308555974512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d6633fe751f0f4ba0f50bb25ac17df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forestGrassMaterial: {fileID: 2100000, guid: 7390a6488b0ace1409a128b813b11e1f, type: 2}
+  plainsGrassMaterial: {fileID: 2100000, guid: ac26f0e41623e524abd8045ba821dbe1, type: 2}
+  regularTreeMaterial: {fileID: 2100000, guid: 5c30c12b29bebd242a16c71cb1ed925a, type: 2}
+  smallTreeMaterial: {fileID: 2100000, guid: 2e5752514f9094c4a80c48917995c783, type: 2}
+  bigTreeMaterial: {fileID: 2100000, guid: 59452665470227f489534c080df48ec8, type: 2}
+  grassObjectMaterial: {fileID: 2100000, guid: e46b7fdf30f2d474082cefc20d75095d, type: 2}
+  objectiveTime: 0
+  playing: 0
+  summerTime: 0
+  fallTime: 0
+--- !u!114 &3086092308555974524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086092308555974512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 2
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &3086092308555974514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086092308555974512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634b4d21d2ff84e4fb7fb4f8ed201179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  player: {fileID: 0}
+  seedFile: seedFile
+  worldDataFile: worldData
+  worldName: 
+  renderDistance: 150
+  chunk: 0
+  onNumber: 0
+  start: 0
+  newChunkPosition: {x: 0, y: 0, z: 0}
+  worldSeed: 0
+  holderForSaving:
+    x: 0
+    y: 0
+    z: -0.41
+    time: 0
+    chunkType: 0
+    itemsToRemove: []
+    itemsToAdd: []
+  spawnedChunkHolder:
+    deleted: 0
+    edited: 0
+    x: 0
+    y: 0
+    z: 0
+    chunkType: 0
+    chunkObject: {fileID: 0}
+    spawnedByPlayer: {fileID: 0}
+    itemsToRemove: []
+    itemsToAdd: []
+  chunkInformation:
+    chunks: []
+  emptyChunkInformation:
+    chunks: []
+  itemDatabase: {fileID: 0}
+  databaseObject: {fileID: 0}
+  areaCollider: {fileID: 0}
+  chunkChances:
+  - chunkType: 0
+    minChance: 0
+    maxChance: 10
+    spawnAmount: 50
+    isWater: 0
+  - chunkType: 1
+    minChance: 10
+    maxChance: 30
+    spawnAmount: 10
+    isWater: 0
+  - chunkType: 2
+    minChance: 30
+    maxChance: 40
+    spawnAmount: 30
+    isWater: 0
+  - chunkType: 3
+    minChance: 41
+    maxChance: 60
+    spawnAmount: 10
+    isWater: 0
+  - chunkType: 4
+    minChance: 61
+    maxChance: 100
+    spawnAmount: 10
+    isWater: 1
+  renderAmount:
+  - x: 0
+    z: 0
+  - x: 0
+    z: 1
+  - x: 0
+    z: -1
+  - x: 1
+    z: 0
+  - x: -1
+    z: 0
+  - x: 1
+    z: 1
+  - x: -1
+    z: -1
+  - x: 1
+    z: -1
+  - x: -1
+    z: 1
+  - x: 0
+    z: 2
+  - x: 0
+    z: -2
+  - x: 2
+    z: 0
+  - x: -2
+    z: 0
+  - x: 2
+    z: 2
+  - x: -2
+    z: -2
+  - x: 2
+    z: -2
+  - x: -2
+    z: 2
+  - x: 1
+    z: 2
+  - x: -1
+    z: 2
+  - x: 1
+    z: -2
+  - x: 2
+    z: 1
+  - x: -2
+    z: 1
+  - x: -2
+    z: -1
+  - x: 2
+    z: -1
+  - x: -1
+    z: -2
+  - x: 1
+    z: 3
+  - x: -1
+    z: 3
+  - x: 1
+    z: -3
+  - x: -1
+    z: -3
+  - x: -3
+    z: 1
+  - x: 3
+    z: 1
+  - x: 3
+    z: -1
+  - x: -3
+    z: -1
+  - x: 3
+    z: 3
+  - x: 3
+    z: 2
+  - x: 2
+    z: 3
+  - x: -3
+    z: 2
+  - x: -3
+    z: -2
+  - x: 2
+    z: -3
+  - x: -2
+    z: -3
+  - x: -2
+    z: 3
+  - x: 3
+    z: -2
+  - x: -3
+    z: -3
+  - x: 3
+    z: -3
+  - x: 3
+    z: -3
+  - x: 3
+    z: 3
+  - x: -3
+    z: 3
+  - x: 0
+    z: 3
+  - x: 3
+    z: 0
+  - x: -3
+    z: 0
+  - x: 0
+    z: -3
+  - x: 4
+    z: 1
+  - x: -4
+    z: 1
+  - x: 4
+    z: -1
+  - x: -4
+    z: -1
+  - x: 1
+    z: 4
+  - x: -1
+    z: 4
+  - x: 1
+    z: -4
+  - x: -1
+    z: -4
+  - x: 0
+    z: 4
+  - x: 0
+    z: -4
+  - x: 4
+    z: 0
+  - x: -4
+    z: 0
+  - x: 4
+    z: 2
+  - x: -4
+    z: 2
+  - x: -4
+    z: -2
+  - x: 4
+    z: -2
+  - x: 2
+    z: 4
+  - x: -2
+    z: 4
+  - x: -2
+    z: -4
+  - x: 2
+    z: -4
+  - x: 3
+    z: 4
+  - x: -3
+    z: 4
+  - x: -3
+    z: -4
+  - x: 3
+    z: -4
+  - x: 4
+    z: 3
+  - x: 4
+    z: -3
+  - x: -4
+    z: -3
+  - x: -4
+    z: 3
+  - x: 4
+    z: 4
+  - x: -4
+    z: 4
+  - x: -4
+    z: -4
+  - x: 4
+    z: -4
+  ChunkTypes:
+  - type: 0
+    Chunk: {fileID: 6117734822223956190, guid: 5c21d74caf075c3488f36f64803ddaeb, type: 3}
+    itemsToSpawn: 07000000040000000c00000011000000030000000600000013000000
+    numberOfItemsToSpawn: 05000000020000000200000001000000030000000300000003000000
+  - type: 0
+    Chunk: {fileID: 0}
+    itemsToSpawn: 
+    numberOfItemsToSpawn: 
+  - type: 2
+    Chunk: {fileID: 4690906573832531100, guid: 2755d9fa2d3eb714e8f738205ef993f9, type: 3}
+    itemsToSpawn: 110000000700000003000000
+    numberOfItemsToSpawn: 020000000d00000004000000
+  - type: 3
+    Chunk: {fileID: 4007277146547556541, guid: ef23f35018253fb4c98476e14f223f50, type: 3}
+    itemsToSpawn: 0800000009000000
+    numberOfItemsToSpawn: 0600000005000000
+  - type: 4
+    Chunk: {fileID: 6428448642482377715, guid: 89f06ba82a8878e4cb8f458900fca82c, type: 3}
+    itemsToSpawn: 
+    numberOfItemsToSpawn: 
+  - type: 5
+    Chunk: {fileID: 3819666555214667074, guid: d70ee5b4c8f074a4ab88619c98751a4b, type: 3}
+    itemsToSpawn: 0700000016000000170000000600000018000000
+    numberOfItemsToSpawn: 0c00000006000000030000000a00000006000000
+  - type: 6
+    Chunk: {fileID: 7390229142840243300, guid: 574829d7c0acdf3458fac47a74e488f1, type: 3}
+    itemsToSpawn: 190000001c0000000300000013000000060000000400000007000000
+    numberOfItemsToSpawn: 01000000010000000500000004000000070000000200000007000000
+  - type: 7
+    Chunk: {fileID: 4788613872939290301, guid: 33222c1f1fc34a242a6210d90b5c776b, type: 3}
+    itemsToSpawn: 
+    numberOfItemsToSpawn: 
+  spawnedChunkPositions: []
+  spawnedChunks: []
+  localItemsToRemove: []
+--- !u!114 &-3459656097654691157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086092308555974512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01

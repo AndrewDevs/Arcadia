@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4283701978258667097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032235232219187636}
+  - component: {fileID: 2948957883217672936}
+  - component: {fileID: -3687911810342870224}
+  m_Layer: 0
+  m_Name: seasonObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1032235232219187636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283701978258667097}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 117.41527, y: 216.31172, z: -1.7468872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2948957883217672936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283701978258667097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b7b49a11eca67644bd303aa1edc3972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forestGrassMaterial: {fileID: 2100000, guid: 7390a6488b0ace1409a128b813b11e1f, type: 2}
+  plainsGrassMaterial: {fileID: 2100000, guid: ac26f0e41623e524abd8045ba821dbe1, type: 2}
+  regularTreeMaterial: {fileID: 2100000, guid: 5c30c12b29bebd242a16c71cb1ed925a, type: 2}
+  smallTreeMaterial: {fileID: 2100000, guid: 2e5752514f9094c4a80c48917995c783, type: 2}
+  bigTreeMaterial: {fileID: 2100000, guid: 59452665470227f489534c080df48ec8, type: 2}
+  grassObjectMaterial: {fileID: 2100000, guid: e46b7fdf30f2d474082cefc20d75095d, type: 2}
+  redWoodTreeMaterial: {fileID: 2100000, guid: b8a30ff78d7ded647af827da47ed74e3, type: 2}
+  pineTreeMaterial: {fileID: 2100000, guid: 0363437cc3c06034488ec244175bce40, type: 2}
+  redWoodChunkGrassMaterial: {fileID: 2100000, guid: 9841cb07ebd6dfe4283ef0de8fa8585c,
+    type: 2}
+  sunFlowerStem: {fileID: -2505642851634945670, guid: 6dfa74aa25b0c46419bdd6403d47f16c,
+    type: 3}
+  sunFlowerLeaf: {fileID: -7965264003302306982, guid: 6dfa74aa25b0c46419bdd6403d47f16c,
+    type: 3}
+  roseStem: {fileID: -876546973899608171, guid: 113124651d4b3fb46b1a20a4ccfc8306,
+    type: 3}
+  orangeFlowerStem: {fileID: -876546973899608171, guid: d2d811c9cd4f01745b7bafc06990b974,
+    type: 3}
+--- !u!114 &-3687911810342870224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283701978258667097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0

@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7722524381793009741
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -1921605412886705540, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: variation
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -1921605412886705540, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: objectsToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1921605412886705540, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: objectsToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 4276112183436147220, guid: cf2e3e3df8872c44692f63d341394269,
+        type: 3}
+    - target: {fileID: 278742258771312297, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: itemName
+      value: Bush Stalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 278742258771312297, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: itemNumber
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855593672413957429, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: sceneId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855593672413957429, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045630859384767073, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417854915901486589, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
+      propertyPath: m_Name
+      value: bushStalk
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -3248264596453030377, guid: 001cfe3b8e11ac240ab5494006722400, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 001cfe3b8e11ac240ab5494006722400, type: 3}
