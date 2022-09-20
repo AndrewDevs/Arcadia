@@ -23,6 +23,7 @@ public class worldGenerator : NetworkBehaviour
     public string worldName;
 
     public int renderDistance;
+    public int trueRenderDistance = 5;
     public int chunk;
     public int onNumber;
     int worldNumber = 0;
@@ -244,142 +245,182 @@ public class worldGenerator : NetworkBehaviour
                     zRounded = z - zRemainder;
                 }
                 //This code rounds the given z to the nearest 15th. Again, I don't understand how it works.
-                for (int j = 0; j < 5 ; j++) //Going through our render amount array that times our given chunk position by what is necessary to spawn a certain amount of chunks.
+
+                if(player.playerRenderDistance == 0) //If the render distance is 0, which is a glitch, then set it to 4 to resolve the issue.
                 {
-
-                    float Multiplier = 15 * j;
-                    //This multiplier is sort-of like rendering distance.
-
-                    Vector3 roundedPos = new Vector3(xRounded, 0, zRounded);
-                    
-
-                    Vector3 soonChunkPosition = roundedPos + cameraObject.transform.forward * Multiplier;
-                    //This vector is just the player's position (roundedPos) multiplied by a certain amount in the forward direction of the camera.
-
-                    Vector3 soonRightChunkPosition = cameraObject.transform.right * Multiplier;
-
-                    //soonChunkPosition = soonChunkPosition + soonRightChunkPosition;
-
-                    #region rounding the front-view chunk positions to spawn
-                    float soonX = Mathf.Round(soonChunkPosition.x);
-                    //Round our player's transform.position.x to the nearest tenth.
-                    float sXRemainder = soonX % 15;
-                    float sXRounded = new float();
-                    if (sXRemainder > 15)
-                    {
-                        sXRounded = soonX - sXRemainder + 30;
-                    }
-                    else
-                    {
-                        sXRounded = soonX - sXRemainder;
-                    }
-                    //This code rounds the given x to the nearest 15th. Again, I don't understand how it works.
-
-                    float soonZ = Mathf.Round(soonChunkPosition.z);
-                    //Round our player's transform.position.x to the nearest tenth.
-                    float sZRemainder = soonZ % 15;
-                    float sZRounded = new float();
-                    if (sZRemainder > 15)
-                    {
-                        sZRounded = soonZ - sZRemainder + 30;
-                    }
-                    else
-                    {
-                        sZRounded = soonZ - sZRemainder;
-                    }
-                    //This code rounds the given x to the nearest 15th. Again, I don't understand how it works.
-                    #endregion
-                    //This region just rounds the soonChunkPosition to 15 so chunks can spawn in a grid like fasion.
-
-                    #region math for biome generation
-
-                    float posX = new float();
-                    float posZ = new float();
-
-                    posZ = sZRounded + worldSeed;
-                    posX = sXRounded + worldSeed;
-
-
-                    float biomeValue = Mathf.PerlinNoise(posX / 400.2f, posZ / 400.3f);
-
-
-                    if (biomeValue > 0 && biomeValue < 0.3)
-                    {
-                        chunk = ChunkTypes[0].type; //spawn a forest chunk. 
-
-                    }
-                    else if (biomeValue > 0.3 && biomeValue < 0.45)
-                    {
-                        chunk = ChunkTypes[2].type; //Spawn a plains chunk.
-
-                    }
-                    else if (biomeValue > 0.45 && biomeValue < 0.5)
-                    {
-                        chunk = ChunkTypes[6].type; //Spawn a redwood chunk.
-
-                    }
-                    else if (biomeValue > 0.5 && biomeValue < 0.6)
-                    {
-                        chunk = ChunkTypes[3].type; //Spawn a rock chunk.
-
-                    }
-                    else if (biomeValue > 0.6 && biomeValue < 0.8)
-                    {
-                        chunk = ChunkTypes[5].type; //Spawn a flower chunk.
-
-                    }
-                    else if (biomeValue > 0.8)
-                    {
-                        chunk = ChunkTypes[7].type; //Spawn a cave chunk.
-
-                    }
-
-
-
-
-                    #endregion
-
-
-                    #region Y axis     
-
-                    float mountain = Mathf.PerlinNoise(posX / 310.2f, posZ / 330.2f) * 280;
-                    float smoothness = Mathf.PerlinNoise(posX / 730.2f, posZ / 730.2f);
-                    float frequency = Mathf.PerlinNoise(posX / 330.2f, posZ / 330.2f) * 130;
-                    float waveLength = Mathf.PerlinNoise(posX / 730.2f, posZ / 730.2f) * 500;
-                    y = Mathf.PerlinNoise(mountain / waveLength, smoothness / waveLength) * frequency;
-
-
-                    if (y < 18) //If Y is greater than -1 but less than 5, then it will be a water chunk.
-                    {
-                        chunk = ChunkTypes[4].type;
-                        //Here we are assigning our chunk int to the water chunk type int, so we can spawn a water chunk.
-                        y = 18;
-                        //Change y to 0 as this is for a waterChunk and we want all waterChunks on the same level.
-                    }
-
-                    if (chunk == ChunkTypes[7].type)
-                    {
-                        y = y - 20;
-                    }
-
-
-                    #endregion
-
-
-                    newChunkPosition = new Vector3(sXRounded, 0, sZRounded);
-                    //Set the newChunkPosition, which is the position the chunk will be spawned at, with our Rounded floats in addition to our Added floats,3.
-                    //0Y is determined elsewhere.
-                    float distance = Vector3.Distance(newChunkPosition, player.player.transform.position);
-
-                    if (distance < renderDistance)
-                    {
-                        checkIfSpawned(chunk, newChunkPosition, y, player.player);
-                        //Check if a chunk has already been spawned in this position, and if not spawn one there.
-                    }
-
+                    player.playerRenderDistance = 4;
                 }
 
+                for (int r = 0; r < player.playerRenderDistance; r++) //Loop for renderDistance. Render distance is local to the player - we access it through the player list.
+                {
+                    int renderSideMultiplier = 15 * r;
 
+                    for (int i = 0; i < 3; i++)
+                    {
+
+                        if(r > 1)  //All this does is makes sure that, if we've already spawned forward chunks (which we do on r 1), to not do that again. We avoid it by increasing i to 1.
+                        {
+                            if(i == 0)
+                            {
+                                i = 1;
+                            }
+                        }
+
+                        for (int j = 0; j < 10; j++) //Going through our render amount array that times our given chunk position by what is necessary to spawn a certain amount of chunks.
+                        {
+                            float Multiplier = 15 * j;
+                            //This multiplier is sort-of like rendering distance.
+
+                            Vector3 roundedPos = new Vector3();
+                            Vector3 soonChunkPosition = new Vector3();
+                            //This vector is just the player's position (roundedPos) multiplied by a certain amount in the forward direction of the camera.
+
+                            if (i == 0) //Forward Chunks
+                            {
+                                roundedPos = new Vector3(xRounded, 0, zRounded);
+                                soonChunkPosition = roundedPos + cameraObject.transform.forward * Multiplier;
+                                //This vector is just the player's position (roundedPos) multiplied by a certain amount in the forward direction of the camera.
+                            }
+                            if (i == 1) //Right Chunks
+                            {
+                                roundedPos = new Vector3(xRounded, 0, zRounded);
+                                roundedPos = roundedPos + cameraObject.transform.right * renderSideMultiplier;
+                                soonChunkPosition = roundedPos + cameraObject.transform.forward * Multiplier;
+                                //This vector is just the player's position (roundedPos) multiplied by a certain amount in the forward direction of the camera.
+                            }
+                            if (i == 2) //Left Chunks
+                            {
+                                roundedPos = new Vector3(xRounded, 0, zRounded);
+                                roundedPos = roundedPos - cameraObject.transform.right * renderSideMultiplier;
+                                soonChunkPosition = roundedPos + cameraObject.transform.forward * Multiplier;
+                                //This vector is just the player's position (roundedPos) multiplied by a certain amount in the forward direction of the camera.
+                            }
+
+
+                            #region rounding the front-view chunk positions to spawn
+                            float soonX = Mathf.Round(soonChunkPosition.x);
+                            //Round our player's transform.position.x to the nearest tenth.
+                            float sXRemainder = soonX % 15;
+                            float sXRounded = new float();
+                            if (sXRemainder > 15)
+                            {
+                                sXRounded = soonX - sXRemainder + 30;
+                            }
+                            else
+                            {
+                                sXRounded = soonX - sXRemainder;
+                            }
+                            //This code rounds the given x to the nearest 15th. Again, I don't understand how it works.
+
+                            float soonZ = Mathf.Round(soonChunkPosition.z);
+                            //Round our player's transform.position.x to the nearest tenth.
+                            float sZRemainder = soonZ % 15;
+                            float sZRounded = new float();
+                            if (sZRemainder > 15)
+                            {
+                                sZRounded = soonZ - sZRemainder + 30;
+                            }
+                            else
+                            {
+                                sZRounded = soonZ - sZRemainder;
+                            }
+                            //This code rounds the given x to the nearest 15th. Again, I don't understand how it works.
+                            #endregion
+                            //This region just rounds the soonChunkPosition to 15 so chunks can spawn in a grid like fasion.
+
+                            #region math for biome generation
+
+                            float posX = new float();
+                            float posZ = new float();
+
+                            posZ = sZRounded + worldSeed;
+                            posX = sXRounded + worldSeed;
+
+
+                            float biomeValue = Mathf.PerlinNoise(posX / 400.2f, posZ / 400.3f);
+
+
+                            if (biomeValue > 0 && biomeValue < 0.3)
+                            {
+                                chunk = ChunkTypes[0].type; //spawn a forest chunk. 
+
+                            }
+                            else if (biomeValue > 0.3 && biomeValue < 0.45)
+                            {
+                                chunk = ChunkTypes[2].type; //Spawn a plains chunk.
+
+                            }
+                            else if (biomeValue > 0.45 && biomeValue < 0.5)
+                            {
+                                chunk = ChunkTypes[6].type; //Spawn a redwood chunk.
+
+                            }
+                            else if (biomeValue > 0.5 && biomeValue < 0.6)
+                            {
+                                chunk = ChunkTypes[3].type; //Spawn a rock chunk.
+
+                            }
+                            else if (biomeValue > 0.6 && biomeValue < 0.8)
+                            {
+                                chunk = ChunkTypes[5].type; //Spawn a flower chunk.
+
+                            }
+                            else if (biomeValue > 0.8)
+                            {
+                                chunk = ChunkTypes[7].type; //Spawn a cave chunk.
+
+                            }
+
+
+
+
+                            #endregion
+
+
+                            #region Y axis     
+
+                            float mountain = Mathf.PerlinNoise(posX / 310.2f, posZ / 330.2f) * 280;
+                            float smoothness = Mathf.PerlinNoise(posX / 730.2f, posZ / 730.2f);
+                            float frequency = Mathf.PerlinNoise(posX / 330.2f, posZ / 330.2f) * 130;
+                            float waveLength = Mathf.PerlinNoise(posX / 730.2f, posZ / 730.2f) * 500;
+                            y = Mathf.PerlinNoise(mountain / waveLength, smoothness / waveLength) * frequency;
+
+
+                            if (y < 18) //If Y is greater than -1 but less than 5, then it will be a water chunk.
+                            {
+                                chunk = ChunkTypes[4].type;
+                                //Here we are assigning our chunk int to the water chunk type int, so we can spawn a water chunk.
+                                y = 18;
+                                //Change y to 0 as this is for a waterChunk and we want all waterChunks on the same level.
+                            }
+
+                            if (chunk == ChunkTypes[7].type)
+                            {
+                                y = y - 20;
+                            }
+
+
+                            #endregion
+
+
+                            newChunkPosition = new Vector3(sXRounded, 0, sZRounded);
+                            //Set the newChunkPosition, which is the position the chunk will be spawned at, with our Rounded floats in addition to our Added floats,3.
+                            //0Y is determined elsewhere.
+                            float distance = Vector3.Distance(newChunkPosition, player.player.transform.position);
+
+                            if (distance < renderDistance)
+                            {
+                                checkIfSpawned(chunk, newChunkPosition, y, player.player);
+                                //Check if a chunk has already been spawned in this position, and if not spawn one there.
+                            }
+
+
+
+
+                        }
+
+                    }
+                }
             }
         }
     }
@@ -1411,5 +1452,6 @@ public class seedInfo
 public class playerInfo
 {
     public GameObject player;
+    public int playerRenderDistance;
     public String username;
 }

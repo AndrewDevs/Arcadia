@@ -250,6 +250,7 @@ MonoBehaviour:
   Null: {fileID: 9015766715841818976, guid: a655d969b35ebc9419bd9c511b8beb19, type: 3}
   player: {fileID: 3816821051729778500}
   pauseMenu: {fileID: 0}
+  options: {fileID: 0}
   worldGeneratorObj: {fileID: 0}
   fThreeMenu: {fileID: 0}
   seasonObject: {fileID: 4283701978258667097, guid: e241e3cba752fc849b7ff7305b2a8aff,
@@ -260,6 +261,7 @@ MonoBehaviour:
   pause: 0
   f3: 0
   fly: 0
+  option: 0
   playersInventory: {fileID: 2381224626532870715}
   inventoryUserI: {fileID: 0}
   gameItemDatabase: {fileID: 7511230339676959324, guid: 7b2dd9a61bc697b4b80466af6e4cb16d,

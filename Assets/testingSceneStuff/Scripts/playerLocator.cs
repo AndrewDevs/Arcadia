@@ -32,5 +32,11 @@ public class playerLocator : MonoBehaviour
     {
         SceneManager.LoadScene("menu");
     }
+    public void Options()
+    {
+        playerScript.options.SetActive(true);
+        playerScript.option = true;
+        //Set the option bool to true as our options screen is active.
+    }
 
 }

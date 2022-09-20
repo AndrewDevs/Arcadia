@@ -40,6 +40,7 @@ public class playerMovement : NetworkBehaviour
     public GameObject Null;
     public GameObject player;
     public GameObject pauseMenu;
+    public GameObject options;
     public GameObject worldGeneratorObj;
     public GameObject fThreeMenu;
     public GameObject seasonObject;
@@ -55,6 +56,7 @@ public class playerMovement : NetworkBehaviour
     public bool f3 = false;
     bool onGround = false;
     public bool fly = false;
+    public bool option = false;
 
     public inventory playersInventory;
 
@@ -113,6 +115,8 @@ public class playerMovement : NetworkBehaviour
         //Find the pause menu, which is apart of our player's Canvas (canvasToSpawn).
          pauseMenu.SetActive(pause);
         //this makes the pauseMenu unActive at start.
+        options = GameObject.Find("options");
+        options.SetActive(option);
         GameObject Database = GameObject.Find("Database(Clone)");
         gameItemDatabase = Database.GetComponent<Database>();
         //Spawn the gameItemDatabase.
@@ -404,10 +408,18 @@ public class playerMovement : NetworkBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.Escape) == true)
                 {
+                    if (option == true) //if the options screen is open when we wish to close the pauseMenu.
+                    {
+                        option = false; 
+                        //set the bool to false.
+                        options.SetActive(false);
+                        //and disable the options screen.
+                    }
                     pause = !pause;
                     //Set the pause bool to whatever it is not, so if the player clicks Escape multiple times it will open and close smoothly.
                     pauseMenu.SetActive(pause);
                     //We allow the bool to dictate whether the pauseMenu is open or not.
+
 
                 }
 
@@ -1046,5 +1058,24 @@ public class playerMovement : NetworkBehaviour
 
 
     }
+
+    [Command(requiresAuthority = false)]
+    public void CmdUpdateRenderDistance(int renderValue) //This command communicates to the server players list what the new render distance for the player is. Called in the renderDistanceUI script.
+    {
+
+        GameObject worldGenObject = GameObject.Find("worldGenerator(Clone)");
+        worldGenerator worldGenScript = worldGenObject.GetComponent<worldGenerator>();
+
+        for (int i = 0; i < worldGenScript.players.Count; i++)
+        {
+            if(worldGenScript.players[i].player == player)
+            {
+                worldGenScript.players[i].playerRenderDistance = renderValue;
+            }
+        }
+
+    }
+
+
 }
 
