@@ -91,7 +91,8 @@ MonoBehaviour:
   seedFile: seedFile
   worldDataFile: worldData
   worldName: 
-  renderDistance: 150
+  renderDistance: 175
+  trueRenderDistance: 5
   chunk: 0
   onNumber: 0
   start: 0
@@ -149,173 +150,6 @@ MonoBehaviour:
     maxChance: 100
     spawnAmount: 10
     isWater: 1
-  renderAmount:
-  - x: 0
-    z: 0
-  - x: 0
-    z: 1
-  - x: 0
-    z: -1
-  - x: 1
-    z: 0
-  - x: -1
-    z: 0
-  - x: 1
-    z: 1
-  - x: -1
-    z: -1
-  - x: 1
-    z: -1
-  - x: -1
-    z: 1
-  - x: 0
-    z: 2
-  - x: 0
-    z: -2
-  - x: 2
-    z: 0
-  - x: -2
-    z: 0
-  - x: 2
-    z: 2
-  - x: -2
-    z: -2
-  - x: 2
-    z: -2
-  - x: -2
-    z: 2
-  - x: 1
-    z: 2
-  - x: -1
-    z: 2
-  - x: 1
-    z: -2
-  - x: 2
-    z: 1
-  - x: -2
-    z: 1
-  - x: -2
-    z: -1
-  - x: 2
-    z: -1
-  - x: -1
-    z: -2
-  - x: 1
-    z: 3
-  - x: -1
-    z: 3
-  - x: 1
-    z: -3
-  - x: -1
-    z: -3
-  - x: -3
-    z: 1
-  - x: 3
-    z: 1
-  - x: 3
-    z: -1
-  - x: -3
-    z: -1
-  - x: 3
-    z: 3
-  - x: 3
-    z: 2
-  - x: 2
-    z: 3
-  - x: -3
-    z: 2
-  - x: -3
-    z: -2
-  - x: 2
-    z: -3
-  - x: -2
-    z: -3
-  - x: -2
-    z: 3
-  - x: 3
-    z: -2
-  - x: -3
-    z: -3
-  - x: 3
-    z: -3
-  - x: 3
-    z: -3
-  - x: 3
-    z: 3
-  - x: -3
-    z: 3
-  - x: 0
-    z: 3
-  - x: 3
-    z: 0
-  - x: -3
-    z: 0
-  - x: 0
-    z: -3
-  - x: 4
-    z: 1
-  - x: -4
-    z: 1
-  - x: 4
-    z: -1
-  - x: -4
-    z: -1
-  - x: 1
-    z: 4
-  - x: -1
-    z: 4
-  - x: 1
-    z: -4
-  - x: -1
-    z: -4
-  - x: 0
-    z: 4
-  - x: 0
-    z: -4
-  - x: 4
-    z: 0
-  - x: -4
-    z: 0
-  - x: 4
-    z: 2
-  - x: -4
-    z: 2
-  - x: -4
-    z: -2
-  - x: 4
-    z: -2
-  - x: 2
-    z: 4
-  - x: -2
-    z: 4
-  - x: -2
-    z: -4
-  - x: 2
-    z: -4
-  - x: 3
-    z: 4
-  - x: -3
-    z: 4
-  - x: -3
-    z: -4
-  - x: 3
-    z: -4
-  - x: 4
-    z: 3
-  - x: 4
-    z: -3
-  - x: -4
-    z: -3
-  - x: -4
-    z: 3
-  - x: 4
-    z: 4
-  - x: -4
-    z: 4
-  - x: -4
-    z: -4
-  - x: 4
-    z: -4
   ChunkTypes:
   - type: 0
     Chunk: {fileID: 6117734822223956190, guid: 5c21d74caf075c3488f36f64803ddaeb, type: 3}
@@ -346,6 +180,10 @@ MonoBehaviour:
     itemsToSpawn: 190000001c0000000300000013000000060000000400000007000000
     numberOfItemsToSpawn: 01000000010000000500000004000000070000000200000007000000
   - type: 7
+    Chunk: {fileID: 6117734822223956190, guid: edbd49f17456f2447b1cf90d071e86b4, type: 3}
+    itemsToSpawn: 
+    numberOfItemsToSpawn: 
+  - type: 8
     Chunk: {fileID: 4788613872939290301, guid: 33222c1f1fc34a242a6210d90b5c776b, type: 3}
     itemsToSpawn: 
     numberOfItemsToSpawn: 

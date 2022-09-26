@@ -10,6 +10,8 @@ public class chunkScript : NetworkBehaviour
 {
     public bool spawned;
 
+    public bool visible;
+
     public int type;
 
     public List<GameObject> enviornmentObjects = new List<GameObject>();
@@ -78,8 +80,6 @@ public class chunkScript : NetworkBehaviour
         //Destroy the chunk over the network.
     }
 
-
-   
 
 
 

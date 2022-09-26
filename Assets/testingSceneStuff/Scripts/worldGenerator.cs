@@ -360,14 +360,14 @@ public class worldGenerator : NetworkBehaviour
                                 chunk = ChunkTypes[3].type; //Spawn a rock chunk.
 
                             }
-                            else if (biomeValue > 0.6 && biomeValue < 0.8)
+                            else if (biomeValue > 0.6 && biomeValue < 0.7)
                             {
                                 chunk = ChunkTypes[5].type; //Spawn a flower chunk.
 
                             }
-                            else if (biomeValue > 0.8)
+                            else if (biomeValue > 0.7)
                             {
-                                chunk = ChunkTypes[7].type; //Spawn a cave chunk.
+                                chunk = ChunkTypes[5].type; //Spawn a cave chunk.
 
                             }
 
@@ -391,13 +391,23 @@ public class worldGenerator : NetworkBehaviour
                                 chunk = ChunkTypes[4].type;
                                 //Here we are assigning our chunk int to the water chunk type int, so we can spawn a water chunk.
                                 y = 18;
-                                //Change y to 0 as this is for a waterChunk and we want all waterChunks on the same level.
+                                //Change y to 18 as this is for a waterChunk and we want all waterChunks on the same level.
                             }
-
-                            if (chunk == ChunkTypes[7].type)
+                            
+                            /*
+                            if(chunk == ChunkTypes[7].type)
                             {
-                                y = y - 20;
-                            }
+                                int random = Mathf.RoundToInt(posX + posZ * y);
+                                UnityEngine.Random.InitState(random);
+                                int result = UnityEngine.Random.Range(1, 10);
+                                if(result == 2)
+                                {
+                                    chunk = ChunkTypes[8].type;
+                                    y = y - 35;
+
+                                }
+                            } */
+
 
 
                             #endregion
@@ -700,6 +710,23 @@ public class worldGenerator : NetworkBehaviour
                     float distance = 0f; //Declare the float distance here so it can be used below.
                     if (spawnedChunks[j].chunkObject != null)
                     {
+                        /*
+                            Transform cameraObj = player.player.transform.GetChild(0);
+                            Camera camera = cameraObj.GetComponent<Camera>();
+
+                            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
+                            if (GeometryUtility.TestPlanesAABB(planes, spawnedChunks[j].chunkObject.GetComponent<Collider>().bounds))
+                            {
+                                destroy = false;
+                                break;
+                            }
+                            else
+                            {
+                                destroy = true;
+                            }
+                        */
+                        
+                        
                         distance = Vector3.Distance(spawnedChunks[j].chunkObject.transform.position, player.player.transform.position); //Get the distance of each player relative to the chunk we are on (spawnedChunks[j].
 
                         if (distance > renderDistance) // If the chunk distance is greater then the render distance, then we will set destroy to true. If the else statement does not run the chunk will be destroyed.
@@ -712,70 +739,7 @@ public class worldGenerator : NetworkBehaviour
                             destroy = false; //Set destroy to false as it will not be destroyed.
                             break; //Break the loop as there is a player close to the chunk.
                         } 
-
-                        float x = Mathf.Round(player.player.transform.position.x);
-                        //Round our player's transform.position.x to the nearest tenth.
-                        xRemainder = x % 15;
-                        if (xRemainder > 15)
-                        {
-                            xRounded = x - xRemainder + 30;
-                        }
-                        else
-                        {
-                            xRounded = x - xRemainder;
-                        }
-                        //This code rounds out given x to the nearest hundred. I don't understand how it works.
-                        float z = Mathf.Round(player.player.transform.position.z);
-                        //Round our player's transform.position.x to the nearest tenth.
-                        zRemainder = z % 15;
-                        if (zRemainder > 15)
-                        {
-                            zRounded = z - zRemainder + 30;
-                        }
-                        else
-                        {
-                            zRounded = z - zRemainder;
-                        }
-                         /*
-                        float rotation = player.player.transform.rotation.y;
-                        if (rotation > -0.85f && rotation < 0.35f)
-                        {
-                            //UnityEngine.Debug.Log("West");
-
-                            if (spawnedChunks[j].chunkObject.transform.position.z < zRounded)
-                            {
-                                destroy = true;
-                            }
-
-                        }
-                        if (rotation > 0.85f)
-                        {
-                            //UnityEngine.Debug.Log("East");
-                            if (spawnedChunks[j].chunkObject.transform.position.z > zRounded)
-                            {
-                                destroy = true;
-                            }
-                        }
-                        if (rotation >= 0.70f && rotation <= 0.85)
-                        {
-                            //UnityEngine.Debug.Log("South");
-                            if (spawnedChunks[j].chunkObject.transform.position.x > xRounded)
-                            {
-                                destroy = true;
-                            }
-                        }
-                        if (rotation >= -0.70f && rotation <= -0.85)
-                        {
-                            //UnityEngine.Debug.Log("North");
-                            if (spawnedChunks[j].chunkObject.transform.position.x < xRounded)
-                            {
-                                destroy = true;
-
-
-                            }
-                        }
-                         */
-
+                        
                     }
                 }
                 else //If the player is null, and thus has left the game and does not exist, then we will remove them from this list.

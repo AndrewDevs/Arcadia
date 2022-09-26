@@ -55,8 +55,6 @@ public class menuButtons : MonoBehaviour
 
     public playerMovement playerScript;
 
-    public List<worlds> worldsList = new List<worlds>();
-
     public List<GameObject> worldInstances = new List<GameObject>();
 
 
@@ -91,9 +89,9 @@ public class menuButtons : MonoBehaviour
                     amount = amount - 100;
 
                     GameObject instance = Instantiate(worldHolder, new Vector3(0, amount, 0), Quaternion.identity);
-                    Transform textObj = instance.transform.Find("worldName");
-                    Text text = textObj.GetComponent<Text>();
-                    text.text = worldInstance.worldName;
+                    Transform Obj = instance.transform.GetChild(3);
+                    InputField objInput = Obj.GetComponent<InputField>();
+                    objInput.text = worldInstance.worldName;
 
                     worldInstances.Add(instance);
 
@@ -133,6 +131,8 @@ public class menuButtons : MonoBehaviour
     {
         
     }
+
+
 
 
     public void singlePlayer()
@@ -261,74 +261,7 @@ public class menuButtons : MonoBehaviour
         //We then set the player's canvas for the menu to false, so they cannot see it in game.
     }
 
-    public void loadWorld()
-    {
 
-        worldList world = new worldList();
-
-        GameObject parent = GameObject.Find("worlds");
-
-        parentScript = parent.GetComponent<menuButtons>();
-
-        GameObject usernameObject = GameObject.Find("usernameInput");
-        username = usernameObject.GetComponent<InputField>();
-        playerScript.username = username.text;
-
-        if (parentScript.hostingServer == false)
-        {
-            manager.StartHost();
-        }
-        else
-        {
-            manager.StartServer();
-        }
-        //We are starting a client + host here, so the player is playing in singleplayer.
-        GameObject worldGen = GameObject.Find("worldGenerator(Clone)");
-
-        if (File.Exists(Application.persistentDataPath + "/seedFile.dat"))
-        {
-            string name = "filler";
-
-            Transform worldName = thisObject.transform.Find("worldName");
-
-            Text nameText = worldName.GetComponent<Text>();
-
-            name = nameText.text;
-
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/" + "seedFile" + ".dat", FileMode.Open);
-            seedInfo savedSeedInfo = (seedInfo)bf.Deserialize(file);
-            file.Close();
-            //Open the file that contains the worlds list.
-            worldGenerator worldGenScript = worldGen.GetComponent<worldGenerator>();
-
-            foreach (worlds worldInstance in savedSeedInfo.worldInfo) //Seach in said worlds list for one that equals our world's name, and is thus our world.
-            {
-                if(worldInstance.worldName == name)
-                {
-
-                    worldGenScript.worldName = worldInstance.worldName;
-
-                }
-            }
-            worldGenScript.OnStart();
-            
-
-        }
-
-        if (parentScript.hostingServer == false)
-        {
-            canvasObject.SetActive(false);
-            //We then set the player's canvas for the menu to false, so they cannot see it in game.
-        }
-        else
-        {
-            mainMenu.SetActive(false);
-            parent.SetActive(false);
-        }
-
-
-    }
 
    /* public void CmdaddPlayer(worldGenerator script, playerInfo Player)
     {
