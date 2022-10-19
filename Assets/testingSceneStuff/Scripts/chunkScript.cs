@@ -16,7 +16,6 @@ public class chunkScript : NetworkBehaviour
 
     public List<GameObject> enviornmentObjects = new List<GameObject>();
 
-
     public override void OnStartClient() //Ran when enabled
     {       
         if (spawned == false)

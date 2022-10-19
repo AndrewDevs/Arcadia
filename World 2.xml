@@ -2,174 +2,32 @@
 <saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <chunks>
     <chunkInfo>
-      <x>-180</x>
-      <y>23.5062618</y>
-      <z>390</z>
+      <x>0</x>
+      <y>26.2144566</y>
+      <z>0</z>
       <time>0</time>
-      <chunkType>0</chunkType>
-      <itemsToRemove>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>26.5</y>
-          <z>391.2</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>26.5</y>
-          <z>391.2</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>28</y>
-          <z>391.2</z>
-          <id>2</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>26.5</y>
-          <z>391.2</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>28</y>
-          <z>391.2</z>
-          <id>2</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>28.8</y>
-          <z>391.2</z>
-          <id>1</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>26.5</y>
-          <z>391.2</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>28</y>
-          <z>391.2</z>
-          <id>2</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-182.2</x>
-          <y>28.8</y>
-          <z>391.2</z>
-          <id>1</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-174.1</x>
-          <y>28.75</y>
-          <z>391.8</z>
-          <id>5</id>
-        </spawnedEnviornmentInfo>
-      </itemsToRemove>
-      <itemsToAdd />
+      <chunkType>5</chunkType>
+      <chunkItems />
     </chunkInfo>
     <chunkInfo>
-      <x>-165</x>
-      <y>23.6793785</y>
-      <z>390</z>
+      <x>15</x>
+      <y>22.3013554</y>
+      <z>15</z>
       <time>0</time>
-      <chunkType>0</chunkType>
-      <itemsToRemove>
+      <chunkType>5</chunkType>
+      <chunkItems />
+      <naturalItemsToRemove>
         <spawnedEnviornmentInfo>
           <deleted>false</deleted>
           <rX>0</rX>
           <rY>0</rY>
           <rZ>0</rZ>
-          <x>-172</x>
-          <y>28.2</y>
-          <z>393.1</z>
-          <id>2</id>
+          <x>17.1</x>
+          <y>27.5</y>
+          <z>14.4</z>
+          <id>22</id>
         </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-172</x>
-          <y>28.2</y>
-          <z>393.1</z>
-          <id>2</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-166.3</x>
-          <y>30.7</y>
-          <z>392.7</z>
-          <id>18</id>
-        </spawnedEnviornmentInfo>
-      </itemsToRemove>
-      <itemsToAdd />
-    </chunkInfo>
-    <chunkInfo>
-      <x>-165</x>
-      <y>23.5023613</y>
-      <z>405</z>
-      <time>0</time>
-      <chunkType>0</chunkType>
-      <itemsToRemove>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-159.2</x>
-          <y>28.75</y>
-          <z>402.6</z>
-          <id>5</id>
-        </spawnedEnviornmentInfo>
-      </itemsToRemove>
-      <itemsToAdd />
+      </naturalItemsToRemove>
     </chunkInfo>
   </chunks>
 </saveInfo>

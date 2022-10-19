@@ -622,37 +622,50 @@ public class playerMovement : NetworkBehaviour
             {
                 if (worldGenScript.spawnedChunks[i].chunkObject.transform.position.x == X && worldGenScript.spawnedChunks[i].chunkObject.transform.position.z == Z) //If the instance's x and z match our X and Z we derived above, then we have found the item's chunk.
                 {
+                    worldGenScript.spawnedChunks[i].edited = true;
 
-                            spawnedEnviornmentInfo objectToPickUp = new spawnedEnviornmentInfo();
+                    for (int j = 0; j < worldGenScript.spawnedChunks[i].serializationObjects.Count; j++)
+                    {
+                        if(worldGenScript.spawnedChunks[i].serializationObjects[j].id == id && worldGenScript.spawnedChunks[i].serializationObjects[j].x == x && worldGenScript.spawnedChunks[i].serializationObjects[j].y == y && worldGenScript.spawnedChunks[i].serializationObjects[j].z == z)
+                        {
+                            worldGenScript.spawnedChunks[i].serializationObjects.Remove(worldGenScript.spawnedChunks[i].serializationObjects[j]);
+                        }
+                        //This just goes through our serializationObjects list and attempts to find the object we want to remove. Once we find it we...remove it. We find it based on the passed function paramaters.
 
-                            objectToPickUp.rX = rotation.x;
-                            objectToPickUp.rY = rotation.y;
-                            objectToPickUp.rZ = rotation.z;
+                    }
 
-                            objectToPickUp.x = x;
-                            objectToPickUp.y = y;
-                            objectToPickUp.z = z;
-                            objectToPickUp.id = id;
+                    spawnedEnviornmentInfo removeSerInfo = new spawnedEnviornmentInfo(); //This will be the class instance that holds our item we picked up's info. We use this to locate it in the file in worldGenerator and remove it there.
 
-                            worldGenScript.spawnedChunks[i].itemsToRemove.Add(objectToPickUp);
-                            //Compile our clicked item's info into a class we can add to the itemsToRemove list on the chunk, and then add it.
+                    removeSerInfo.rX = rotation.x;
+                    removeSerInfo.rY = rotation.y;
+                    removeSerInfo.rZ = rotation.z;
 
-                            
-                            worldGenScript.spawnedChunks[i].edited = true;
+                    removeSerInfo.x = x;
+                    removeSerInfo.y = y;
+                    removeSerInfo.z = z;
+                    removeSerInfo.id = id;
+                    removeSerInfo.itemName = name;
+                    //Compile the data.
 
-                            Vector3 chunkPosition = new Vector3(); //Create a new chunkPosition to pass to our CmdSave.
+                    worldGenScript.spawnedChunks[i].removeSerializationObjects.Add(removeSerInfo);
+                    //Add the instance we are removed from serializationObjects to removeSerializationObjects. We do this so we can search for it in the file to remove it there aswell. This only applies to non-natural objects.
 
-                            chunkPosition.x = worldGenScript.spawnedChunks[i].chunkObject.transform.position.x;
-                            chunkPosition.y = worldGenScript.spawnedChunks[i].chunkObject.transform.position.y;
-                            chunkPosition.z = worldGenScript.spawnedChunks[i].chunkObject.transform.position.z;
-                            //Compile the data to our chunkPosition.
 
-                            worldGenScript.save(worldGenScript.spawnedChunks[i].chunkType, chunkPosition, worldGenScript.spawnedChunks[i]);
-                            /*We use a command in order to do the chunk serialization as we only want the server to have access/control over it (makes life easier). This is located in the worldGenScript as
-                              the worldGenScript is the main script which controls the natural world (spawning, culling, loading, and now saving)*/
-                            RpcremoveItemFromChunk(worldGenScript.spawnedChunks[i].chunkObject, oldPos, id);
-                        
-                    
+
+                    RpcremoveItemFromChunk(worldGenScript.spawnedChunks[i].chunkObject, oldPos, id);
+                    //We keep this around for local culling reasons.
+
+
+                    Vector3 chunkPosition = new Vector3(); //Create a new chunkPosition to pass to our CmdSave.
+
+                    chunkPosition.x = worldGenScript.spawnedChunks[i].chunkObject.transform.position.x;
+                    chunkPosition.y = worldGenScript.spawnedChunks[i].chunkObject.transform.position.y;
+                    chunkPosition.z = worldGenScript.spawnedChunks[i].chunkObject.transform.position.z;
+                    //Compile the data to our chunkPosition.
+
+                    worldGenScript.save(worldGenScript.spawnedChunks[i].chunkType, chunkPosition, worldGenScript.spawnedChunks[i]);
+                    /*We use a command in order to do the chunk serialization as we only want the server to have access/control over it (makes life easier). This is located in the worldGenScript as
+                      the worldGenScript is the main script which controls the natural world (spawning, culling, loading, and now saving)*/
                 }
             }
         }
@@ -665,21 +678,24 @@ public class playerMovement : NetworkBehaviour
 
                 if (worldGenScript.spawnedChunks[k].chunkObject.transform.position.x == X && worldGenScript.spawnedChunks[k].chunkObject.transform.position.z == Z) //If the instance's x and z match our X and Z
                 {
-                    spawnedEnviornmentInfo spawnedEnv = new spawnedEnviornmentInfo();
-                    spawnedEnv.x = x;
-                    spawnedEnv.y = y;
-                    spawnedEnv.z = z;
-                    spawnedEnv.rX = rotation.eulerAngles.x;
-                    spawnedEnv.rY = rotation.eulerAngles.y;
-                    spawnedEnv.rZ = rotation.eulerAngles.z;
+                    spawnedEnviornmentInfo serInfo = new spawnedEnviornmentInfo(); //This will be the class instance that holds our item's info. It's info is based on the function's passed paramaters.
 
-                    spawnedEnv.id = id;
-                    
-                    spawnedEnv.itemName = name;
-                    //then we will make a holder class for our item we have placed upon the chunk ^
+                    serInfo.rX = rotation.x;
+                    serInfo.rY = rotation.y;
+                    serInfo.rZ = rotation.z;
 
-                    worldGenScript.spawnedChunks[k].itemsToAdd.Add(spawnedEnv);
-                    //And we will add that holder class to that chunk's enviornmentInformation on the server, so it may be serialized.
+                    serInfo.x = x;
+                    serInfo.y = y;
+                    serInfo.z = z;
+                    serInfo.id = id;
+                    serInfo.itemName = name;
+                    //Compile the data.
+
+                    worldGenScript.spawnedChunks[k].serializationObjects.Add(serInfo);
+                    //add our item to the chunk's serialization Object's list, which is a server-only list. This server list will be used for serialization, whilst the local one is for culling.
+
+                    RpcaddItemToChunk(oldPos, id, worldGenScript.spawnedChunks[k].chunkObject);
+                    //This function merely adds our item's data to the chunk locally for culling purposes.
 
                     Vector3 chunkPosition = new Vector3(); //Create a new chunkPosition to pass to our Save.
 
@@ -690,8 +706,6 @@ public class playerMovement : NetworkBehaviour
 
                     worldGenScript.save(worldGenScript.spawnedChunks[k].chunkType, chunkPosition, worldGenScript.spawnedChunks[k]);
 
-                    RpcaddItemToChunk(oldPos, id, worldGenScript.spawnedChunks[k].chunkObject); 
-                    //This function merely adds our item's data to the chunk locally for culling purposes.
 
                 }
             }

@@ -11,6 +11,8 @@ public class item : NetworkBehaviour
     public string itemName;
     public int itemNumber;
 
+    public bool natural;
+
 
     //Database uses ints, not strings so this is changed to an int.
     bool hitByRaycast;

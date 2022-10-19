@@ -57,14 +57,7 @@ public class worldGenerator : NetworkBehaviour
     int generalT;
     int choose;
 
-    public chunkInfo holderForSaving;
-
     public spawnedChunkInfo spawnedChunkHolder;
-
-    public saveInfo chunkInformation;
-
-    public saveInfo emptyChunkInformation;
-
 
     NetworkConnection currentClient;
 
@@ -817,11 +810,21 @@ public class worldGenerator : NetworkBehaviour
 
     public void save(int chunkType, Vector3 position, spawnedChunkInfo chunkInstance)
     {
+        saveInfo chunkInformation = new saveInfo();       
+
+        chunkInfo holderForSaving = new chunkInfo();
+
+        /*chunkInformation is of the type saveInfo, which has a general list (chunks) that we will serialize. This list is made up of...chunkinfos. This we use
+          holderForSaving to add our specific chunks info to, then we add the chunk to chunkInformation for proper serialization.*/
+
         holderForSaving.x = position.x;
         holderForSaving.y = position.y;
         holderForSaving.z = position.z;
         holderForSaving.chunkType = chunkType;
         //Add our chunks info to our holderForSaving so it may be serialized...this info is passed as a paramater and located in the playerMovement Script.
+
+        chunkInformation.chunks.Add(holderForSaving);
+        //Add the holderForSaving to chunkInfo as chunkInfo. Read why above.
 
         float originalRegion = position.x + position.z;
         float region = 0;
@@ -834,51 +837,9 @@ public class worldGenerator : NetworkBehaviour
         {
             region = originalRegion - roundedRegion;
         }
-        //Figuring out the "region" the chunk is, this just rounds to the nearest 250 - I don't understand the technacalities of it.
+        //Figuring out the "region" the chunk is, this just rounds to the nearest 250 - I don't understand the technacalities of it. This is so we can save the world in regions rather than one big file.
 
-     /*   for (int i = 0; i < chunkInstance.itemsToAdd.Count(); i++)
-        {
-            spawnedEnviornmentInfo envInf = new spawnedEnviornmentInfo();
-            //envIf class here used to add objects to our holderForSaving.itemsToAdd list.              
 
-            envInf.x = chunkInstance.itemsToAdd[i].x;
-            envInf.y = chunkInstance.itemsToAdd[i].y;
-            envInf.z = chunkInstance.itemsToAdd[i].z;
-            envInf.id = chunkInstance.itemsToAdd[i].id;
-            envInf.rX = chunkInstance.itemsToAdd[i].rX;
-            envInf.rY = chunkInstance.itemsToAdd[i].rY;
-            envInf.rZ = chunkInstance.itemsToAdd[i].rZ;
-
-            envInf.itemName = chunkInstance.itemsToAdd[i].itemName;
-            //Compile the data of this particular enviornmentInformation into our envInf.
-
-            holderForSaving.itemsToAdd.Add(envInf);
-            //Finally add this particular enviornment info instance to our holderForSaving's list to be serialized.
-
-        } */
-        for (int i = 0; i < chunkInstance.itemsToRemove.Count(); i++)
-        {
-            spawnedEnviornmentInfo envInf = new spawnedEnviornmentInfo();
-            //envIf class here used to add objects to our holderForSaving.itemsToAdd list.              
-
-            envInf.x = chunkInstance.itemsToRemove[i].x;
-            envInf.y = chunkInstance.itemsToRemove[i].y;
-            envInf.z = chunkInstance.itemsToRemove[i].z;
-            envInf.id = chunkInstance.itemsToRemove[i].id;
-            envInf.rX = chunkInstance.itemsToRemove[i].rX;
-            envInf.rY = chunkInstance.itemsToRemove[i].rY;
-            envInf.rZ = chunkInstance.itemsToRemove[i].rZ;
-
-            envInf.itemName = chunkInstance.itemsToRemove[i].itemName;
-            //Compile the data of this particular enviornmentInformation into our envInf.
-
-            holderForSaving.itemsToRemove.Add(envInf);
-            //Finally add this particular enviornment info instance to our holderForSaving's list to be serialized.
-
-        }
-        //Above loops just get the data from our chunks itemsToRemove and itemsToAdd lists and add them to our holderForSaving so all the data can be serialized.
-        chunkInformation.chunks.Add(holderForSaving);
-        //Add the holderForSaving to chunkInfo as chunkInfo is the same class that we will serialize. It's essentially a list of holderForSaving's class.
         if (File.Exists(Application.persistentDataPath + "/" + worldName + "/" + region + chunkType + ".dat")) //If a worldData file exists for this world.
         {
             bool exists = false;
@@ -892,52 +853,44 @@ public class worldGenerator : NetworkBehaviour
             {
                 if (savedChunkInfo.chunks[i].x == holderForSaving.x && savedChunkInfo.chunks[i].z == holderForSaving.z) //If this chunk has already been saved.
                 {
-                    for (int k = 0; k < chunkInstance.itemsToRemove.Count(); k++) //Go through the list on our chunkInstance
+                    for(int p = 0; p < savedChunkInfo.chunks[i].chunkItems.Count; p++) //for each instance in chunk items.
+                    {
+
+                        for (int k = 0; k < chunkInstance.removeSerializationObjects.Count; k++) //for each instance in removeSerializationObjects.
+                        {
+                            if (savedChunkInfo.chunks[i].chunkItems[p].id == chunkInstance.removeSerializationObjects[k].id && savedChunkInfo.chunks[i].chunkItems[p].x == chunkInstance.removeSerializationObjects[k].x && savedChunkInfo.chunks[i].chunkItems[p].y == chunkInstance.removeSerializationObjects[k].y && savedChunkInfo.chunks[i].chunkItems[p].z == chunkInstance.removeSerializationObjects[k].z)
+                            {
+                                //If they match...
+                                savedChunkInfo.chunks[i].chunkItems.Remove(savedChunkInfo.chunks[i].chunkItems[p]); //Remove the instance from our file as it has been removed and we...consequently don't want it spawned again.                            
+                                break; 
+                            }
+                        }
+                        /* here we just check if any of our removeSerializationObjects (item's we've removed from the chunk) are in our file. 
+                            If they are then we wish to remove them. */
+                    }
+
+                    for (int j = 0; j < chunkInstance.serializationObjects.Count(); j++) //Go through the list on our chunkInstance, the chunkinstance is just the chunk instance on the spawnedChunks server list. Passed from playerMovement.
                     {
                         spawnedEnviornmentInfo envInf = new spawnedEnviornmentInfo();
                         //envIf class here used to add objects to our holderForSaving.itemsToAdd list.              
 
-                        envInf.x = chunkInstance.itemsToRemove[k].x;
-                        envInf.y = chunkInstance.itemsToRemove[k].y;
-                        envInf.z = chunkInstance.itemsToRemove[k].z;
-                        envInf.id = chunkInstance.itemsToRemove[k].id;
-                        envInf.rX = chunkInstance.itemsToRemove[k].rX;
-                        envInf.rY = chunkInstance.itemsToRemove[k].rY;
-                        envInf.rZ = chunkInstance.itemsToRemove[k].rZ;
+                        envInf.x = chunkInstance.serializationObjects[j].x;
+                        envInf.y = chunkInstance.serializationObjects[j].y;
+                        envInf.z = chunkInstance.serializationObjects[j].z;
+                        envInf.id = chunkInstance.serializationObjects[j].id;
+                        envInf.rX = chunkInstance.serializationObjects[j].rX;
+                        envInf.rY = chunkInstance.serializationObjects[j].rY;
+                        envInf.rZ = chunkInstance.serializationObjects[j].rZ;
 
-                        envInf.itemName = chunkInstance.itemsToRemove[k].itemName;
+                        envInf.itemName = chunkInstance.serializationObjects[j].itemName;
                         //Compile the data of this particular enviornmentInformation into our envInf.
 
-                        savedChunkInfo.chunks[i].itemsToRemove.Add(envInf);
-                        //Add this specific enviornmentinfo to our saved itemsToAdd list.
+                        savedChunkInfo.chunks[i].chunkItems.Add(envInf);
+                        //Add this specific savedChunkInfo to our saved chunk Items (items on the chunk) list.
 
                     }
 
-                    for (int j = 0; j < chunkInstance.itemsToAdd.Count(); j++) //Go through the list on our chunkInstance
-                    {
-                        spawnedEnviornmentInfo envInf = new spawnedEnviornmentInfo();
-                        //envIf class here used to add objects to our holderForSaving.itemsToAdd list.              
-
-                        envInf.x = chunkInstance.itemsToAdd[j].x;
-                        envInf.y = chunkInstance.itemsToAdd[j].y;
-                        envInf.z = chunkInstance.itemsToAdd[j].z;
-                        envInf.id = chunkInstance.itemsToAdd[j].id;
-                        envInf.rX = chunkInstance.itemsToAdd[j].rX;
-                        envInf.rY = chunkInstance.itemsToAdd[j].rY;
-                        envInf.rZ = chunkInstance.itemsToAdd[j].rZ;
-
-                        envInf.itemName = chunkInstance.itemsToAdd[j].itemName;
-                        //Compile the data of this particular enviornmentInformation into our envInf.
-
-                        savedChunkInfo.chunks[i].itemsToAdd.Add(envInf);
-                        //Add this specific enviornmentinfo to our saved itemsToAdd list.
-
-                    }
-
-                    //savedChunkInfo.chunks.Remove(savedChunkInfo.chunks[i]); //Remove the chunk that we are trying to save again, as it has been updated again.
-                    //savedChunkInfo.chunks.Add(holderForSaving);
                     exists = true;
-                    //Close the fileStream, which also closes the line where we Deserialize it as it is connected directly to the fileStream.
                     break;
 
                 }
@@ -989,9 +942,6 @@ public class worldGenerator : NetworkBehaviour
 
 
         }
-        holderForSaving = new chunkInfo();
-        chunkInformation.chunks.Clear();
-
     }
 
 
@@ -1087,13 +1037,8 @@ public class worldGenerator : NetworkBehaviour
                     }
                     else if (exists == true) //Otherwise, if this chunk has been saved prior then we will load the chunk in.
                     {
-                        foreach (spawnedEnviornmentInfo envObject in savedChunkInfo.chunks[saveIndex].itemsToRemove)
-                        {
-                            Vector3 envPosition = new Vector3(envObject.x, envObject.y, envObject.z);
 
-                            TargetAddLocalItemRemove(client, envObject.id, envPosition);
-                        }
-                        foreach (spawnedEnviornmentInfo envObject in savedChunkInfo.chunks[saveIndex].itemsToAdd)
+                        foreach (spawnedEnviornmentInfo envObject in savedChunkInfo.chunks[saveIndex].chunkItems)
                         {
                             Quaternion rotation = Quaternion.Euler(envObject.rX, envObject.rY, envObject.rZ);
                             Vector3 envPosition = new Vector3(envObject.x, envObject.y, envObject.z);
@@ -1346,8 +1291,7 @@ public class chunkObjectPropetrys
     public float z;
     public float time;
     public int chunkType;
-    public List<spawnedEnviornmentInfo> itemsToRemove = new List<spawnedEnviornmentInfo>();
-    public List<spawnedEnviornmentInfo> itemsToAdd = new List<spawnedEnviornmentInfo>();
+    public List<spawnedEnviornmentInfo> chunkItems = new List<spawnedEnviornmentInfo>();
 }
 [Serializable]
 public class enviornmentInfo //This class is for our envorment info, it's a custom variable that holds a enviornment object's position and id.
@@ -1382,8 +1326,9 @@ public class spawnedChunkInfo
     public int chunkType;
     public GameObject chunkObject;
     public GameObject spawnedByPlayer; //Here we are adding a spawnedByPlayer variable to know *who* spawned the chunk first, and we can further use that to know if two players are in the same chunk area, this will be used for syncing mob movements with time, etc.
-    public List<spawnedEnviornmentInfo> itemsToRemove = new List<spawnedEnviornmentInfo>();
-    public List<spawnedEnviornmentInfo> itemsToAdd = new List<spawnedEnviornmentInfo>();
+    public List<spawnedEnviornmentInfo> serializationObjects = new List<spawnedEnviornmentInfo>();
+    public List<spawnedEnviornmentInfo> removeSerializationObjects = new List<spawnedEnviornmentInfo>();
+
 
 }
 [Serializable]

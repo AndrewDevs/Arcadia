@@ -2,24 +2,12 @@
 <saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <chunks>
     <chunkInfo>
-      <x>2300</x>
-      <y>37.6063</y>
-      <z>-875</z>
+      <x>0</x>
+      <y>28.807951</y>
+      <z>0</z>
       <time>0</time>
-      <chunkType>6</chunkType>
-      <itemsToRemove>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>2306.9375</x>
-          <y>44.6063</y>
-          <z>-880.677551</z>
-          <id>28</id>
-        </spawnedEnviornmentInfo>
-      </itemsToRemove>
-      <itemsToAdd />
+      <chunkType>2</chunkType>
+      <chunkItems />
     </chunkInfo>
   </chunks>
 </saveInfo>
