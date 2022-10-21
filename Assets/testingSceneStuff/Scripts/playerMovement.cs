@@ -516,14 +516,13 @@ public class playerMovement : NetworkBehaviour
 
                                     int itemLocationNumber = itemHit.itemNumber;
                                     hitObject = hit.transform.gameObject;
-
-
+                                   
                                     float x = hitObject.transform.position.x;
                                     float z = hitObject.transform.position.z;
                                     Vector3 pos = hitObject.transform.position;
 
-                                    Quaternion empty = new Quaternion();
-                                    CmdfindObjectsChunk(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty,itemToAdd);                                                                                                         
+                                    Vector3 empty = new Vector3();
+                                    CmdfindObjectsChunk(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty,itemToAdd, itemHit.world);                                                                                                         
 
                                     hit.transform.rotation = Quaternion.Euler(0, 0, 0);
                                     //Set the item we picked up's rotation to 0,0,0 because we generate objects at random rotation and it can act funky when player tries to rotate it when that original, generated, rotation.
@@ -561,9 +560,12 @@ public class playerMovement : NetworkBehaviour
                         position.z = (float)Math.Round((double)itemToPlace.transform.position.z, 1);
 
                         itemToPlace.transform.position = position;
+                        UnityEngine.Debug.Log(itemToPlace.transform.rotation);
+
+                        Vector3 rot = itemToPlace.transform.eulerAngles;
 
                         CmdplaceItem(itemToPlace, position);
-                        CmdfindObjectsChunk(position.x, position.y, position.z, worldGeneratorObj, true, position, itemToPlace.transform.rotation, itemScript.itemNumber);
+                        CmdfindObjectsChunk(position.x, position.y, position.z, worldGeneratorObj, true, position, rot, itemScript.itemNumber, true);
                         itemToPlace = null;
                         //The itemToPlace object already exists and it's position is set in the update code, all this does is remove it from the players inventory, and thus stopping the player's ability to move it.
                     }
@@ -593,7 +595,7 @@ public class playerMovement : NetworkBehaviour
     }
 
     [Command]
-    public void CmdfindObjectsChunk(float x, float y, float z, GameObject worldGenObject, bool placing, Vector3 position, Quaternion rotation, int id) //Pass the floats and networked object instead of the actual hitObject (envObject) because the hitObject is not networked.
+    public void CmdfindObjectsChunk(float x, float y, float z, GameObject worldGenObject, bool placing, Vector3 position, Vector3 rotation, int id, bool world) //Pass the floats and networked object instead of the actual hitObject (envObject) because the hitObject is not networked.
     {
         worldGenScript = worldGenObject.GetComponent<worldGenerator>();
         //We get the worldGenScript from our passed worldGenObject as we need to access the spawnedChunks list to locate an item with a chunk.
@@ -649,8 +651,13 @@ public class playerMovement : NetworkBehaviour
 
                     worldGenScript.spawnedChunks[i].removeSerializationObjects.Add(removeSerInfo);
                     //Add the instance we are removed from serializationObjects to removeSerializationObjects. We do this so we can search for it in the file to remove it there aswell. This only applies to non-natural objects.
-
-
+                    
+                    if(world == false)
+                    {
+                        worldGenScript.spawnedChunks[i].removedEarthlyObjects.Add(removeSerInfo);
+                        /*If world is false, and consequently the object we have picked up is naturally spawned, we add it to our removedEarthlyObjects list.
+                          Which we will use to determine which envObjects the chunk should *not* spawn. */
+                    }
 
                     RpcremoveItemFromChunk(worldGenScript.spawnedChunks[i].chunkObject, oldPos, id);
                     //We keep this around for local culling reasons.
@@ -703,7 +710,6 @@ public class playerMovement : NetworkBehaviour
                     chunkPosition.y = worldGenScript.spawnedChunks[k].chunkObject.transform.position.y;
                     chunkPosition.z = worldGenScript.spawnedChunks[k].chunkObject.transform.position.z;
                     //Compile the data to our chunkPosition.
-
                     worldGenScript.save(worldGenScript.spawnedChunks[k].chunkType, chunkPosition, worldGenScript.spawnedChunks[k]);
 
 
@@ -927,6 +933,11 @@ public class playerMovement : NetworkBehaviour
     public void RpcplaceItem(int id, Vector3 Position, Quaternion rotation)
     {
         GameObject spawnObj = Instantiate(gameItemDatabase.items[id], Position, rotation);
+
+        item itemScript = spawnObj.GetComponent<item>();
+        itemScript.world = true;
+        //Set world to true as it is an item the player placed down. We set this bool here in the RPC so it applies to all clients.
+
         spawnObj.name = id + " " + Position;
     }
 

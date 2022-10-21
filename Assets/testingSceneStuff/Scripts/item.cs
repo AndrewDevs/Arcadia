@@ -10,20 +10,10 @@ public class item : NetworkBehaviour
 
     public string itemName;
     public int itemNumber;
-
-    public bool natural;
+    public bool world;
 
 
     //Database uses ints, not strings so this is changed to an int.
     bool hitByRaycast;
-
-
-
-
-
-
-
-
-
 }
 

@@ -3,11 +3,37 @@
   <chunks>
     <chunkInfo>
       <x>0</x>
-      <y>28.807951</y>
-      <z>0</z>
+      <y>18.111063</y>
+      <z>45</z>
       <time>0</time>
-      <chunkType>2</chunkType>
-      <chunkItems />
+      <chunkType>5</chunkType>
+      <chunkItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>45.0000038</rX>
+          <rY>180</rY>
+          <rZ>225</rZ>
+          <x>1.3</x>
+          <y>30.2</y>
+          <z>45.8</z>
+          <id>22</id>
+        </spawnedEnviornmentInfo>
+      </chunkItems>
+      <removedItems />
+      <removedEarthlyItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>1</x>
+          <y>18.8</y>
+          <z>52</z>
+          <id>22</id>
+        </spawnedEnviornmentInfo>
+      </removedEarthlyItems>
     </chunkInfo>
   </chunks>
 </saveInfo>
