@@ -2,14 +2,71 @@
 <saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <chunks>
     <chunkInfo>
-      <x>0</x>
-      <y>22.3182678</y>
-      <z>15</z>
+      <x>-45</x>
+      <y>39.425148</y>
+      <z>0</z>
       <time>0</time>
-      <chunkType>2</chunkType>
-      <chunkItems />
+      <chunkType>6</chunkType>
+      <chunkItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>270</rX>
+          <rY>0.112015173</rY>
+          <rZ>0</rZ>
+          <x>-45.4</x>
+          <y>41.1</y>
+          <z>3.3</z>
+          <id>14</id>
+        </spawnedEnviornmentInfo>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>270</rX>
+          <rY>315</rY>
+          <rZ>0</rZ>
+          <x>-44.6</x>
+          <y>41.7</y>
+          <z>4.5</z>
+          <id>30</id>
+        </spawnedEnviornmentInfo>
+      </chunkItems>
       <removedItems />
-      <removedEarthlyItems />
+      <removedEarthlyItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-45.7</x>
+          <y>40.65</y>
+          <z>-0.2</z>
+          <id>20</id>
+        </spawnedEnviornmentInfo>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-45.7</x>
+          <y>39.9</y>
+          <z>-0.2</z>
+          <id>19</id>
+        </spawnedEnviornmentInfo>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-45.4</x>
+          <y>41.8</y>
+          <z>3.3</z>
+          <id>31</id>
+        </spawnedEnviornmentInfo>
+      </removedEarthlyItems>
     </chunkInfo>
   </chunks>
 </saveInfo>

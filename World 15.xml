@@ -2,11 +2,11 @@
 <saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <chunks>
     <chunkInfo>
-      <x>90</x>
-      <y>21.1390972</y>
-      <z>-75</z>
+      <x>15</x>
+      <y>23.14542</y>
+      <z>15</z>
       <time>0</time>
-      <chunkType>3</chunkType>
+      <chunkType>6</chunkType>
       <chunkItems />
       <removedItems />
       <removedEarthlyItems />

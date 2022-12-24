@@ -505,22 +505,19 @@ public class worldGenerator : NetworkBehaviour
             if (i == 1 && onNumber == ChunkTypes[type].numberOfItemsToSpawn.Count() - 1) //If this function is done spawning a chunk.
             {
 
-                if (distance < maxDistance)
-                {
                     spawnItems(client, ChunkTypes[type].itemsToSpawn[onNumber], position, rotation, chunkObject, index, saved);
                     //CmdaddSpawnItemToServer(ChunkTypes[type].itemsToSpawn[onNumber], position, rotation, index); //then set the bool to true, so it will cull ISSUE HERE
                     break;
-                }
+                
 
             }
             else
             {
                 //this spawns the object which we have chosen in our chunks spawn enviornment list...everything below is stuff to add if it is a tree, bush, etc.
-                if (distance < maxDistance)
-                {
+
                     //CmdaddSpawnItemToServer(ChunkTypes[type].itemsToSpawn[onNumber], position, rotation, index);
                     spawnItems(client, ChunkTypes[type].itemsToSpawn[onNumber], position, rotation, chunkObject, index, saved);
-                }
+                
 
             }
 
@@ -593,11 +590,10 @@ public class worldGenerator : NetworkBehaviour
                 {
                     //Here we will finally spawn the accessory item to our enviornmentObject. These will *only* run if the last item is one with an accessory, which seems to not be very common for whatever reason.
 
-                    if (distance < maxDistance)
-                    {
+
                         spawnItems(client, id, objectPosition, rotation, chunkObject, index, saved);
                         //CmdaddSpawnItemToServer(id, objectPosition, rotation, index);
-                    }
+                    
 
                     break;
                 }
@@ -605,11 +601,10 @@ public class worldGenerator : NetworkBehaviour
                 {
                     //Here we will finally spawn the accessory item to our enviornmentObject.
 
-                    if (distance < maxDistance)
-                    {
+
                         spawnItems(client, id, objectPosition, rotation, chunkObject, index, saved);
                         //CmdaddSpawnItemToServer(id, objectPosition, rotation, index);
-                    }
+                    
 
                 }
             }
@@ -741,7 +736,9 @@ public class worldGenerator : NetworkBehaviour
                     break;
                 }
             }
-            foreach (playerInfo localPlayer in players)
+
+
+            foreach (playerInfo localPlayer in players) //local culling.
             {
                 if (localPlayer.player != null) //If the player we are looking to check distance on is not null, and is this still in the server.
                 {
@@ -752,12 +749,12 @@ public class worldGenerator : NetworkBehaviour
 
                     if (distance > localRender)
                     {
-                        TargetlocalCulling(netId.connectionToClient, spawnedChunks[j].chunkObject, true);
-                        //Call the targetRpc that will do the local culling.
+                        //TargetlocalCulling(netId.connectionToClient, spawnedChunks[j].chunkObject, true);
+                        //Destroys a chunk, locally, that is outside of the localRender Distance.
                     }
                     else
                     {
-                        TargetlocalCulling(netId.connectionToClient, spawnedChunks[j].chunkObject, false);
+                        //TargetlocalCulling(netId.connectionToClient, spawnedChunks[j].chunkObject, false);
                         //Call the targetRpc that will do the local culling.
                     }
                 }
@@ -1010,7 +1007,7 @@ public class worldGenerator : NetworkBehaviour
             chunk.SetActive(true); //Set the chunk to true, as we are re-spawning it and everything on it (remember, just activating it in reality, re-spawning just sounds better).
 
             script.OnStartClient(); //Set each enviornmentObject to false.           
-        }
+        } 
     }
 
 

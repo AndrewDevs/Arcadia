@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Diagnostics;
-using Mirror;
 
-public class item : NetworkBehaviour
+public class item : MonoBehaviour
 {
 
     public string itemName;
     public int itemNumber;
     public bool world;
 
+    public bool food;
+    public int foodValue;
+
 
     //Database uses ints, not strings so this is changed to an int.
     bool hitByRaycast;
+
+
+
 }
 

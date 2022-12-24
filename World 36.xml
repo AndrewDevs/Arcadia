@@ -1,12 +1,12 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <chunks>
     <chunkInfo>
-      <x>90</x>
-      <y>21.1390972</y>
-      <z>-75</z>
+      <x>420</x>
+      <y>44.8489876</y>
+      <z>90</z>
       <time>0</time>
-      <chunkType>3</chunkType>
+      <chunkType>2</chunkType>
       <chunkItems />
       <removedItems />
       <removedEarthlyItems />

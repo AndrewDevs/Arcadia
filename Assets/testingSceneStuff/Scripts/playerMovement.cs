@@ -18,6 +18,8 @@ public class playerMovement : NetworkBehaviour
     public int jump;
     public int inSlot;
     public int itemToAdd;
+    public int hunger;
+    public int thirst;
     int itemLocation;
     int id;
 
@@ -57,6 +59,7 @@ public class playerMovement : NetworkBehaviour
     bool onGround = false;
     public bool fly = false;
     public bool option = false;
+    public bool placingObject;
 
     public inventory playersInventory;
 
@@ -71,6 +74,9 @@ public class playerMovement : NetworkBehaviour
     public Text buildText;
 
     public TextMesh floatingUsername;
+
+    public Slider hungerBar;
+    public Slider thirstBar;
 
     public String username;
 
@@ -135,6 +141,15 @@ public class playerMovement : NetworkBehaviour
         CmdsetUsername(username, this, worldGenScript);
         cameraObject.SetActive(true);
         //Set camera to true, we do this here to avoid weird camera bugs that happened before this line was added.
+        GameObject hObject = GameObject.Find("hunger");
+        hungerBar = hObject.GetComponent<Slider>();
+
+        GameObject tObject = GameObject.Find("thirst");
+        thirstBar = tObject.GetComponent<Slider>();
+
+
+        StartCoroutine(hungerAndThirst());
+        //Start taking away hunger and thirst amounts.
 
         #region Finding Stuff
         buildText = GameObject.Find("buildingText").GetComponent<Text>();
@@ -200,7 +215,12 @@ public class playerMovement : NetworkBehaviour
 
         if (itemToPlace != null)
         {
+            placingObject = true;
             itemMovement();
+        }
+        else
+        {
+            placingObject = false;
         }
         
         if (isLocalPlayer == true)
@@ -541,33 +561,68 @@ public class playerMovement : NetworkBehaviour
                     //Place down item functions
                     if (Input.GetMouseButtonDown(1))
                     {
-                        UnityEngine.UI.Image imageToChange = playersInventory.images[inSlot].GetComponent<UnityEngine.UI.Image>();
-                        imageToChange.sprite = null;
-                        // Sets image of whatever slot player is on to null.
-                        playersInventory.Inventory[inSlot].id = 0;
-                        //Change the itemInSlot number to 0 so we know it's empty.
-                        playersInventory.Inventory[inSlot].itemObject = null;
-                        //Change the itemInSlot number to 0 so we know it's empty.
-                        itemToPlace.layer = 0;
-                        //Set layer back to 0 so rayCast can hit it.
-                        id = 0;
-                        //set player inventory slot to empty
-                        item itemScript = itemToPlace.GetComponent<item>();
-                        Vector3 position = new Vector3();
+                        if (placingObject != true) //If we are not placing an object and we have rightclicked, then we may be trying to consume something.
+                        {
+                            if (Physics.Raycast(cameraObject.transform.position, fwd, out hit, 15))
+                            {
+                                itemHit = hit.transform.gameObject.GetComponent<item>();
 
-                        position.x = (float)Math.Round((double)itemToPlace.transform.position.x, 1);
-                        position.y = (float)Math.Round((double)itemToPlace.transform.position.y, 1);
-                        position.z = (float)Math.Round((double)itemToPlace.transform.position.z, 1);
+                                if (itemHit != null)
+                                {
+                                    item itemS = itemHit.GetComponent<item>();
 
-                        itemToPlace.transform.position = position;
-                        UnityEngine.Debug.Log(itemToPlace.transform.rotation);
+                                    if (itemS.food == true)
+                                    {
+                                        hungerBar.value = hungerBar.value + itemS.foodValue;
+                                        int itemToAdd = itemHit.itemNumber;
+                                        hitObject = hit.transform.gameObject;
 
-                        Vector3 rot = itemToPlace.transform.eulerAngles;
+                                        float x = hitObject.transform.position.x;
+                                        float z = hitObject.transform.position.z;
+                                        Vector3 pos = hitObject.transform.position;
 
-                        CmdplaceItem(itemToPlace, position);
-                        CmdfindObjectsChunk(position.x, position.y, position.z, worldGeneratorObj, true, position, rot, itemScript.itemNumber, true);
-                        itemToPlace = null;
-                        //The itemToPlace object already exists and it's position is set in the update code, all this does is remove it from the players inventory, and thus stopping the player's ability to move it.
+                                        Vector3 empty = new Vector3();
+                                        CmdfindObjectsChunk(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty, itemToAdd, itemHit.world);
+
+                                        hit.transform.rotation = Quaternion.Euler(0, 0, 0);
+                                        //Set the item we picked up's rotation to 0,0,0 because we generate objects at random rotation and it can act funky when player tries to rotate it when that original, generated, rotation.
+
+                                        id = 0;
+                                    }
+                                }
+                            }
+                        }
+                        else //if we are placing an object and we right click, then we must be trying to place it down.
+                        {
+
+                            UnityEngine.UI.Image imageToChange = playersInventory.images[inSlot].GetComponent<UnityEngine.UI.Image>();
+                            imageToChange.sprite = null;
+                            // Sets image of whatever slot player is on to null.
+                            playersInventory.Inventory[inSlot].id = 0;
+                            //Change the itemInSlot number to 0 so we know it's empty.
+                            playersInventory.Inventory[inSlot].itemObject = null;
+                            //Change the itemInSlot number to 0 so we know it's empty.
+                            itemToPlace.layer = 0;
+                            //Set layer back to 0 so rayCast can hit it.
+                            id = 0;
+                            //set player inventory slot to empty
+                            item itemScript = itemToPlace.GetComponent<item>();
+                            Vector3 position = new Vector3();
+
+                            position.x = (float)Math.Round((double)itemToPlace.transform.position.x, 1);
+                            position.y = (float)Math.Round((double)itemToPlace.transform.position.y, 1);
+                            position.z = (float)Math.Round((double)itemToPlace.transform.position.z, 1);
+
+                            itemToPlace.transform.position = position;
+                            UnityEngine.Debug.Log(itemToPlace.transform.rotation);
+
+                            Vector3 rot = itemToPlace.transform.eulerAngles;
+
+                            CmdplaceItem(itemToPlace, position);
+                            CmdfindObjectsChunk(position.x, position.y, position.z, worldGeneratorObj, true, position, rot, itemScript.itemNumber, true);
+                            itemToPlace = null;
+                            //The itemToPlace object already exists and it's position is set in the update code, all this does is remove it from the players inventory, and thus stopping the player's ability to move it.
+                        }
                     }
 
                 }
@@ -592,6 +647,15 @@ public class playerMovement : NetworkBehaviour
             }
         }
 
+    }
+
+    IEnumerator hungerAndThirst()
+    {
+        yield return new WaitForSeconds(5);
+        hungerBar.value = hungerBar.value - 1;
+        thirstBar.value = thirstBar.value - 1;
+
+        StartCoroutine(hungerAndThirst());
     }
 
     [Command]
@@ -755,6 +819,7 @@ public class playerMovement : NetworkBehaviour
          so we can replace it with the item in this slot, which will be instantiated. */
         if (playersInventory.Inventory[inSlot].id != 0)
         {
+               
                 CmdspawnObject(playersInventory.Inventory[inSlot].id, itemToPlacePos, Quaternion.identity);
                 //Call our instantiating command so that we may spawn the object type in the player's inventory slot.          
         }

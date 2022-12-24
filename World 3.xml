@@ -2,11 +2,11 @@
 <saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <chunks>
     <chunkInfo>
-      <x>-150</x>
-      <y>28.6853542</y>
-      <z>0</z>
+      <x>330</x>
+      <y>18.2753639</y>
+      <z>120</z>
       <time>0</time>
-      <chunkType>0</chunkType>
+      <chunkType>5</chunkType>
       <chunkItems />
       <removedItems />
       <removedEarthlyItems>
@@ -16,10 +16,10 @@
           <rX>0</rX>
           <rY>0</rY>
           <rZ>0</rZ>
-          <x>-149.8</x>
-          <y>31.7</y>
-          <z>-1.9</z>
-          <id>12</id>
+          <x>327.4</x>
+          <y>18.4</y>
+          <z>125.7</z>
+          <id>7</id>
         </spawnedEnviornmentInfo>
         <spawnedEnviornmentInfo>
           <deleted>false</deleted>
@@ -27,262 +27,20 @@
           <rX>0</rX>
           <rY>0</rY>
           <rZ>0</rZ>
-          <x>-143.8</x>
-          <y>31.7</y>
-          <z>-4.1</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-155.3</x>
-          <y>33.95</y>
-          <z>-1.3</z>
-          <id>5</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-155.3</x>
-          <y>31.7</y>
-          <z>-1.3</z>
-          <id>4</id>
+          <x>328.4</x>
+          <y>18.6</y>
+          <z>126.2</z>
+          <id>29</id>
         </spawnedEnviornmentInfo>
       </removedEarthlyItems>
     </chunkInfo>
     <chunkInfo>
-      <x>-150</x>
-      <y>29.2087936</y>
-      <z>15</z>
+      <x>285</x>
+      <y>18.5864334</y>
+      <z>150</z>
       <time>0</time>
-      <chunkType>0</chunkType>
-      <chunkItems>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>90</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-144</x>
-          <y>29.9</y>
-          <z>14.3</z>
-          <id>16</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>90</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-148</x>
-          <y>29.9</y>
-          <z>14.3</z>
-          <id>16</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>90</rX>
-          <rY>270</rY>
-          <rZ>0</rZ>
-          <x>-149.9</x>
-          <y>29.9</y>
-          <z>15.9</z>
-          <id>16</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>90</rX>
-          <rY>270</rY>
-          <rZ>0</rZ>
-          <x>-149.7</x>
-          <y>29.7</y>
-          <z>22.2</z>
-          <id>16</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>90</rX>
-          <rY>270</rY>
-          <rZ>0</rZ>
-          <x>-149.6</x>
-          <y>32.4</y>
-          <z>22.3</z>
-          <id>10</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>90</rX>
-          <rY>270</rY>
-          <rZ>0</rZ>
-          <x>-149.7</x>
-          <y>32.6</y>
-          <z>15.6</z>
-          <id>10</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>90</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-148.5</x>
-          <y>32.9</y>
-          <z>14.4</z>
-          <id>10</id>
-        </spawnedEnviornmentInfo>
-      </chunkItems>
-      <removedItems />
-      <removedEarthlyItems>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-146.3</x>
-          <y>32.2</y>
-          <z>13.8</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-155.6</x>
-          <y>32.2</y>
-          <z>13.8</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-148.5</x>
-          <y>32.9</y>
-          <z>14.4</z>
-          <id>10</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-144.5</x>
-          <y>32.9</y>
-          <z>14.4</z>
-          <id>10</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-154.1</x>
-          <y>31.4</y>
-          <z>8.2</z>
-          <id>10</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-156.3</x>
-          <y>30.2</y>
-          <z>9.3</z>
-          <id>10</id>
-        </spawnedEnviornmentInfo>
-      </removedEarthlyItems>
-    </chunkInfo>
-    <chunkInfo>
-      <x>-135</x>
-      <y>30.3927536</y>
-      <z>0</z>
-      <time>0</time>
-      <chunkType>0</chunkType>
+      <chunkType>5</chunkType>
       <chunkItems />
-      <removedItems />
-      <removedEarthlyItems />
-    </chunkInfo>
-    <chunkInfo>
-      <x>-150</x>
-      <y>31.7513256</y>
-      <z>30</z>
-      <time>0</time>
-      <chunkType>0</chunkType>
-      <chunkItems />
-      <removedItems />
-      <removedEarthlyItems>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-143.4</x>
-          <y>34.8</y>
-          <z>35.6</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-152.2</x>
-          <y>34.8</y>
-          <z>35</z>
-          <id>12</id>
-        </spawnedEnviornmentInfo>
-      </removedEarthlyItems>
-    </chunkInfo>
-    <chunkInfo>
-      <x>-165</x>
-      <y>29.34325</y>
-      <z>30</z>
-      <time>0</time>
-      <chunkType>0</chunkType>
-      <chunkItems />
-      <removedItems />
-      <removedEarthlyItems />
-    </chunkInfo>
-    <chunkInfo>
-      <x>-165</x>
-      <y>31.0739441</y>
-      <z>15</z>
-      <time>0</time>
-      <chunkType>0</chunkType>
-      <chunkItems>
-        <spawnedEnviornmentInfo>
-          <deleted>false</deleted>
-          <itemName>Player(Clone)</itemName>
-          <rX>-0</rX>
-          <rY>0</rY>
-          <rZ>0</rZ>
-          <x>-157.8</x>
-          <y>29.6</y>
-          <z>11.4</z>
-          <id>10</id>
-        </spawnedEnviornmentInfo>
-      </chunkItems>
       <removedItems />
       <removedEarthlyItems />
     </chunkInfo>

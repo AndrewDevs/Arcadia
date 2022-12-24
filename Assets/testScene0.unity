@@ -1410,6 +1410,9 @@ MonoBehaviour:
   - {fileID: 4720308345485058709, guid: 09e28a25751113242a111c5aa7d9d74d, type: 3}
   - {fileID: 535482194177514480, guid: 157d6ac0b12222342894603687c4437d, type: 3}
   - {fileID: 2275668307737559047, guid: 51fbedfab32dea74a8102a435a16a0e4, type: 3}
+  - {fileID: 483480106652274646, guid: 1ff0c611963a677449995e334ab3fecf, type: 3}
+  - {fileID: 3510220622405216480, guid: 7ad2e36efde966b47a75f953545879c4, type: 3}
+  - {fileID: 9001920803722602381, guid: dcf77b9f61787af4784d1b5e6250f0f0, type: 3}
 --- !u!4 &290755584
 Transform:
   m_ObjectHideFlags: 0
@@ -7075,6 +7078,12 @@ PrefabInstance:
       propertyPath: cullingObject
       value: 
       objectReference: {fileID: 1672653822965120000, guid: a53508974c1dce94db07a807c93231df,
+        type: 3}
+    - target: {fileID: 4911985190242099140, guid: b22096fdac013dd428c80df725520225,
+        type: 3}
+      propertyPath: skyBoxDirLight
+      value: 
+      objectReference: {fileID: 142427489426561667, guid: 44e1c176b66f82244849ed4fe7de1075,
         type: 3}
     - target: {fileID: 4911985190242099140, guid: b22096fdac013dd428c80df725520225,
         type: 3}

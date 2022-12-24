@@ -92,20 +92,12 @@ MonoBehaviour:
   worldDataFile: worldData
   worldName: 
   renderDistance: 175
-  trueRenderDistance: 5
+  trueRenderDistance: 3
   chunk: 0
   onNumber: 0
   start: 0
   newChunkPosition: {x: 0, y: 0, z: 0}
   worldSeed: 0
-  holderForSaving:
-    x: 0
-    y: 0
-    z: -0.41
-    time: 0
-    chunkType: 0
-    itemsToRemove: []
-    itemsToAdd: []
   spawnedChunkHolder:
     deleted: 0
     edited: 0
@@ -115,12 +107,9 @@ MonoBehaviour:
     chunkType: 0
     chunkObject: {fileID: 0}
     spawnedByPlayer: {fileID: 0}
-    itemsToRemove: []
-    itemsToAdd: []
-  chunkInformation:
-    chunks: []
-  emptyChunkInformation:
-    chunks: []
+    serializationObjects: []
+    removeSerializationObjects: []
+    removedEarthlyObjects: []
   itemDatabase: {fileID: 0}
   databaseObject: {fileID: 0}
   areaCollider: {fileID: 0}
@@ -161,8 +150,8 @@ MonoBehaviour:
     numberOfItemsToSpawn: 
   - type: 2
     Chunk: {fileID: 4690906573832531100, guid: 2755d9fa2d3eb714e8f738205ef993f9, type: 3}
-    itemsToSpawn: 110000000700000003000000
-    numberOfItemsToSpawn: 020000000d00000004000000
+    itemsToSpawn: 1100000007000000030000001d000000
+    numberOfItemsToSpawn: 020000000d0000000400000005000000
   - type: 3
     Chunk: {fileID: 4007277146547556541, guid: ef23f35018253fb4c98476e14f223f50, type: 3}
     itemsToSpawn: 0800000009000000
@@ -173,8 +162,8 @@ MonoBehaviour:
     numberOfItemsToSpawn: 
   - type: 5
     Chunk: {fileID: 3819666555214667074, guid: d70ee5b4c8f074a4ab88619c98751a4b, type: 3}
-    itemsToSpawn: 0700000016000000170000000600000018000000
-    numberOfItemsToSpawn: 0c00000006000000030000000a00000006000000
+    itemsToSpawn: 07000000160000001700000006000000180000001d000000
+    numberOfItemsToSpawn: 090000000600000003000000090000000600000005000000
   - type: 6
     Chunk: {fileID: 7390229142840243300, guid: 574829d7c0acdf3458fac47a74e488f1, type: 3}
     itemsToSpawn: 190000001c0000000300000013000000060000000400000007000000
