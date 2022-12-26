@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 6428448642482377014}
   - component: {fileID: 6428448642482377015}
   - component: {fileID: 1878965207538805145}
+  - component: {fileID: 4702448034211734612}
   m_Layer: 0
   m_Name: waterChunk
   m_TagString: Terrain
@@ -244,5 +245,25 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   spawned: 0
+  visible: 0
   type: 4
   enviornmentObjects: []
+--- !u!114 &4702448034211734612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428448642482377715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac790f1e7ba86544a7e82e240b22d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  itemNumber: 0
+  world: 0
+  food: 0
+  foodValue: 0
+  water: 1
+  waterValue: 10

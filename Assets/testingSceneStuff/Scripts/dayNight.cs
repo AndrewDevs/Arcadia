@@ -18,7 +18,7 @@ public class dayNight : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        skyBoxDirLight = GameObject.Find("skyDir(Clone)");
+        skyBoxDirLight = GameObject.Find("sunDirLight(Clone)");
 
         StartCoroutine(rotateLight());
 

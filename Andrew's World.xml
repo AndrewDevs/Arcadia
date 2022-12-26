@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <chunks>
+    <chunkInfo>
+      <x>585</x>
+      <y>21.71328</y>
+      <z>-900</z>
+      <time>0</time>
+      <chunkType>6</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>587.3</x>
+          <y>22.95</y>
+          <z>-905.7</z>
+          <id>20</id>
+        </spawnedEnviornmentInfo>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>587.3</x>
+          <y>22.2</y>
+          <z>-905.7</z>
+          <id>19</id>
+        </spawnedEnviornmentInfo>
+      </removedEarthlyItems>
+    </chunkInfo>
+  </chunks>
+</saveInfo>

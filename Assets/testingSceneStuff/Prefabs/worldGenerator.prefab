@@ -150,8 +150,8 @@ MonoBehaviour:
     numberOfItemsToSpawn: 
   - type: 2
     Chunk: {fileID: 4690906573832531100, guid: 2755d9fa2d3eb714e8f738205ef993f9, type: 3}
-    itemsToSpawn: 1100000007000000030000001d000000
-    numberOfItemsToSpawn: 020000000d0000000400000005000000
+    itemsToSpawn: 110000000700000003000000
+    numberOfItemsToSpawn: 020000000d00000004000000
   - type: 3
     Chunk: {fileID: 4007277146547556541, guid: ef23f35018253fb4c98476e14f223f50, type: 3}
     itemsToSpawn: 0800000009000000

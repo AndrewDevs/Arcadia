@@ -46,6 +46,7 @@ public class playerMovement : NetworkBehaviour
     public GameObject worldGeneratorObj;
     public GameObject fThreeMenu;
     public GameObject seasonObject;
+    public GameObject deathScreen;
     GameObject chatBox;
 
     public NetworkIdentity objectNetId;
@@ -60,6 +61,7 @@ public class playerMovement : NetworkBehaviour
     public bool fly = false;
     public bool option = false;
     public bool placingObject;
+    public bool deathUI;
 
     public inventory playersInventory;
 
@@ -77,6 +79,7 @@ public class playerMovement : NetworkBehaviour
 
     public Slider hungerBar;
     public Slider thirstBar;
+    public Slider healthBar;
 
     public String username;
 
@@ -146,6 +149,12 @@ public class playerMovement : NetworkBehaviour
 
         GameObject tObject = GameObject.Find("thirst");
         thirstBar = tObject.GetComponent<Slider>();
+
+        GameObject healthObject = GameObject.Find("health");
+        healthBar = healthObject.GetComponent<Slider>();
+
+        deathScreen = GameObject.Find("deathScreen");
+        deathScreen.SetActive(false);
 
 
         StartCoroutine(hungerAndThirst());
@@ -231,184 +240,187 @@ public class playerMovement : NetworkBehaviour
                 {
                     if (pause == false)
                     {
-                        float xAxis = Input.GetAxis("Horizontal");
-                        float zAxis = Input.GetAxis("Vertical");
-
-                        Vector3 direction = transform.right * xAxis + transform.forward * zAxis;
-
-                        characterController.Move(direction * speed * Time.deltaTime);
-
-                        if (characterController.isGrounded == false)
+                        if (deathUI == false)
                         {
-                            velocity.y += gravity * Time.deltaTime;
-                        }
-                        else
-                        {
-                            velocity.y = 0;
-                        }
+                            float xAxis = Input.GetAxis("Horizontal");
+                            float zAxis = Input.GetAxis("Vertical");
 
+                            Vector3 direction = transform.right * xAxis + transform.forward * zAxis;
 
+                            characterController.Move(direction * speed * Time.deltaTime);
 
-                        if (Physics.Raycast(cameraObject.transform.position, -Vector3.up, out hit, 3))
-                        {
-                            if (Input.GetKeyDown(KeyCode.Space) == true)
+                            if (characterController.isGrounded == false)
                             {
-                                UnityEngine.Debug.DrawRay(cameraObject.transform.position, -Vector3.up * hit.distance, Color.yellow);
-
-                                velocity.y = Mathf.Sqrt(jump * -2f * gravity);
+                                velocity.y += gravity * Time.deltaTime;
                             }
-                        }
-
-                        characterController.Move(velocity * Time.deltaTime);
-
-                        //Movement code.
-
-                        verticalCameraPosition -= cameraVerticalSpeed * Input.GetAxis("Mouse Y");
-                        //Here we change the verticalCameraPosition float to the position of the mouse verticaly + our cameraVerticalSpeed.
-                        horizontalCameraPosition += horizontalCameraSpeed * Input.GetAxis("Mouse X");
-                        //Here we do the same idea as above, except we do this horizontally.
-                        verticalCameraPosition = Mathf.Clamp(verticalCameraPosition, -90f, 90f);
-                        //Clamp rotation at 90 degrees so player can not rotate 360 on the y axis.
-                        cameraObject.transform.eulerAngles = new Vector3(verticalCameraPosition, horizontalCameraPosition, 0f);
-                        // This merely applies the float changes to our cameras positioning.
-                        transform.eulerAngles = new Vector3(0f, horizontalCameraPosition, 0f);
-                        //Here we rotatate the transform of the player (transform.eulerAngles) horizontally, not vertically. We do not need the player moving up and down as the camera does, this also causes collisions to act weird.
-
-                        #region Hotbar
-
-                        //We do not let the building system operate when we are adding items to inventory because whenever we do so the inventory messes up (inventory adds item to slot then building removes it, causes confusion).
-                        if (Input.GetKeyDown(KeyCode.Alpha1) == true)
-                        {
-                            if (inSlot != 1)
+                            else
                             {
-                                inSlot = 1;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
+                                velocity.y = 0;
                             }
 
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha2) == true)
-                        {
-                            if (inSlot != 2)
+
+
+                            if (Physics.Raycast(cameraObject.transform.position, -Vector3.up, out hit, 3))
                             {
-                                inSlot = 2;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
+                                if (Input.GetKeyDown(KeyCode.Space) == true)
+                                {
+                                    UnityEngine.Debug.DrawRay(cameraObject.transform.position, -Vector3.up * hit.distance, Color.yellow);
+
+                                    velocity.y = Mathf.Sqrt(jump * -2f * gravity);
+                                }
                             }
 
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha3) == true)
-                        {
-                            if (inSlot != 3)
+                            characterController.Move(velocity * Time.deltaTime);
+
+                            //Movement code.
+
+                            verticalCameraPosition -= cameraVerticalSpeed * Input.GetAxis("Mouse Y");
+                            //Here we change the verticalCameraPosition float to the position of the mouse verticaly + our cameraVerticalSpeed.
+                            horizontalCameraPosition += horizontalCameraSpeed * Input.GetAxis("Mouse X");
+                            //Here we do the same idea as above, except we do this horizontally.
+                            verticalCameraPosition = Mathf.Clamp(verticalCameraPosition, -90f, 90f);
+                            //Clamp rotation at 90 degrees so player can not rotate 360 on the y axis.
+                            cameraObject.transform.eulerAngles = new Vector3(verticalCameraPosition, horizontalCameraPosition, 0f);
+                            // This merely applies the float changes to our cameras positioning.
+                            transform.eulerAngles = new Vector3(0f, horizontalCameraPosition, 0f);
+                            //Here we rotatate the transform of the player (transform.eulerAngles) horizontally, not vertically. We do not need the player moving up and down as the camera does, this also causes collisions to act weird.
+
+                            #region Hotbar
+
+                            //We do not let the building system operate when we are adding items to inventory because whenever we do so the inventory messes up (inventory adds item to slot then building removes it, causes confusion).
+                            if (Input.GetKeyDown(KeyCode.Alpha1) == true)
                             {
-                                inSlot = 3;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
+                                if (inSlot != 1)
+                                {
+                                    inSlot = 1;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha2) == true)
+                            {
+                                if (inSlot != 2)
+                                {
+                                    inSlot = 2;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha3) == true)
+                            {
+                                if (inSlot != 3)
+                                {
+                                    inSlot = 3;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha4) == true)
+                            {
+                                if (inSlot != 4)
+                                {
+                                    inSlot = 4;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha5) == true)
+                            {
+                                if (inSlot != 5)
+                                {
+                                    inSlot = 5;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha6) == true)
+                            {
+                                if (inSlot != 6)
+                                {
+                                    inSlot = 6;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha7) == true)
+                            {
+                                if (inSlot != 7)
+                                {
+                                    inSlot = 7;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha8) == true)
+                            {
+                                if (inSlot != 8)
+                                {
+                                    inSlot = 8;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha9) == true)
+                            {
+                                if (inSlot != 9)
+                                {
+                                    inSlot = 9;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
+                            }
+                            if (Input.GetKeyDown(KeyCode.Alpha0) == true)
+                            {
+                                if (inSlot != 10)
+                                {
+                                    inSlot = 10;
+                                    itemToPlaceRot = new Vector3(0, 0, 0);
+                                    //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
+                                    hotBarSpawnItem();
+                                    //Call function that will spawn the item in this inventory/hotbar slot.
+                                    ColorSlot();
+                                }
+
                             }
 
+                            #endregion
                         }
-                        if (Input.GetKeyDown(KeyCode.Alpha4) == true)
-                        {
-                            if (inSlot != 4)
-                            {
-                                inSlot = 4;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
-                            }
-
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha5) == true)
-                        {
-                            if (inSlot != 5)
-                            {
-                                inSlot = 5;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
-                            }
-
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha6) == true)
-                        {
-                            if (inSlot != 6)
-                            {
-                                inSlot = 6;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
-                            }
-
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha7) == true)
-                        {
-                            if (inSlot != 7)
-                            {
-                                inSlot = 7;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
-                            }
-
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha8) == true)
-                        {
-                            if (inSlot != 8)
-                            {
-                                inSlot = 8;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
-                            }
-
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha9) == true)
-                        {
-                            if (inSlot != 9)
-                            {
-                                inSlot = 9;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
-                            }
-
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha0) == true)
-                        {
-                            if (inSlot != 10)
-                            {
-                                inSlot = 10;
-                                itemToPlaceRot = new Vector3(0, 0, 0);
-                                //Set the itemToPlacePos to 0 when we click on a new slot, so the rotation of item in slot 1 does not carry over to the item in slot 2.
-                                hotBarSpawnItem();
-                                //Call function that will spawn the item in this inventory/hotbar slot.
-                                ColorSlot();
-                            }
-
-                        }
-
-                        #endregion
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.F) == true)
@@ -472,14 +484,14 @@ public class playerMovement : NetworkBehaviour
 
                     //This is used to open and close the inventory.
                 }
-                if (pause == true || inventoryOpen == true)
+                if (pause == true || inventoryOpen == true || deathUI == true)
                 {
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     //Unlock the cursor if pause menu is open.
 
                 }
-                else if (pause == false || inventoryOpen == false)
+                else if (pause == false || inventoryOpen == false || deathUI == false)
                 {
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
@@ -571,23 +583,33 @@ public class playerMovement : NetworkBehaviour
                                 {
                                     item itemS = itemHit.GetComponent<item>();
 
-                                    if (itemS.food == true)
+                                    if (itemS != null)
                                     {
-                                        hungerBar.value = hungerBar.value + itemS.foodValue;
-                                        int itemToAdd = itemHit.itemNumber;
-                                        hitObject = hit.transform.gameObject;
 
-                                        float x = hitObject.transform.position.x;
-                                        float z = hitObject.transform.position.z;
-                                        Vector3 pos = hitObject.transform.position;
+                                        if (itemS.food == true)
+                                        {
+                                            hungerBar.value = hungerBar.value + itemS.foodValue;
+                                            healthBar.value = healthBar.value + itemS.foodValue;
+                                            int itemToAdd = itemHit.itemNumber;
+                                            hitObject = hit.transform.gameObject;
 
-                                        Vector3 empty = new Vector3();
-                                        CmdfindObjectsChunk(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty, itemToAdd, itemHit.world);
+                                            float x = hitObject.transform.position.x;
+                                            float z = hitObject.transform.position.z;
+                                            Vector3 pos = hitObject.transform.position;
 
-                                        hit.transform.rotation = Quaternion.Euler(0, 0, 0);
-                                        //Set the item we picked up's rotation to 0,0,0 because we generate objects at random rotation and it can act funky when player tries to rotate it when that original, generated, rotation.
+                                            Vector3 empty = new Vector3();
+                                            CmdfindObjectsChunk(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty, itemToAdd, itemHit.world);
 
-                                        id = 0;
+                                            hit.transform.rotation = Quaternion.Euler(0, 0, 0);
+                                            //Set the item we picked up's rotation to 0,0,0 because we generate objects at random rotation and it can act funky when player tries to rotate it when that original, generated, rotation.
+
+                                            id = 0;
+                                        }
+                                        else if (itemS.water == true)
+                                        {
+                                            thirstBar.value = thirstBar.value + itemS.waterValue;
+
+                                        }
                                     }
                                 }
                             }
@@ -651,11 +673,80 @@ public class playerMovement : NetworkBehaviour
 
     IEnumerator hungerAndThirst()
     {
-        yield return new WaitForSeconds(5);
-        hungerBar.value = hungerBar.value - 1;
-        thirstBar.value = thirstBar.value - 1;
+        yield return new WaitForSeconds(40);
+
+        if (deathUI == false) //If we are not already dead
+        {
+            hungerBar.value = hungerBar.value - 2;
+            thirstBar.value = thirstBar.value - 3;
+
+            if (hungerBar.value == 0 || thirstBar.value == 0) //if hunger or thirst values are at 0
+            {
+                healthBar.value = healthBar.value - 10; // then start taking away health.
+
+                if (healthBar.value == 0)
+                {
+                    death();
+                }
+
+            }
+        }
 
         StartCoroutine(hungerAndThirst());
+    }
+
+    public void death()
+    {
+        characterController.enabled = false; //Disable characterController before we move player back to spawn, if we don't do this then we can't reliably.
+
+        CmdReturnToSpawn(player);
+
+        hungerBar.value = 20;
+        thirstBar.value = 20;
+        healthBar.value = 50;
+        //Reset hunger, thirst, and health values back to their maxes.
+
+
+        for (int i = 0; i < playersInventory.Inventory.Length; i++) //Removes all objects from inventory
+        {
+            playersInventory.Inventory[i].itemImage = null;
+            playersInventory.Inventory[i].itemObject = null;
+            playersInventory.Inventory[i].id = 0;
+        }
+
+        for (int k = 1; k < playersInventory.images.Count; k++) //Changes inventory UI sprites to null
+        {
+            if (playersInventory.images[k].GetComponent<Image>() != null)
+            {
+                playersInventory.images[k].GetComponent<Image>().sprite = null;
+            }
+
+        }
+
+    }
+
+    [Command]
+    public void CmdReturnToSpawn(GameObject playerObject)
+    {
+        Vector3 spawn = new Vector3(0, 50, 0);
+
+        playerObject.transform.localPosition = spawn;
+        //Move player on server to spawn.
+
+        TargetEnableController(connectionToClient, playerObject);
+
+    }
+
+    [TargetRpc]
+    public void TargetEnableController(NetworkConnection target, GameObject playerObject)
+    {
+        deathUI = true;
+        //Set death UI to true as the player is dead. This will cause our cursor to unlock and become visible. This boolean change is detected in Update.
+        deathScreen.SetActive(true);
+        //Set the death screen UI to active.
+        Vector3 spawn = new Vector3(0, 50, 0);
+        playerObject.transform.localPosition = spawn;
+        //Move player via targetRPC back to position too - we do both so that the player is moved back to spawn on the server and client sides. Otherwise it can be inconsistent.
     }
 
     [Command]

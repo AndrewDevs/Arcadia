@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <chunks>
+    <chunkInfo>
+      <x>90</x>
+      <y>22.9696045</y>
+      <z>-90</z>
+      <time>0</time>
+      <chunkType>2</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems />
+    </chunkInfo>
+    <chunkInfo>
+      <x>0</x>
+      <y>28.0453033</y>
+      <z>-15</z>
+      <time>0</time>
+      <chunkType>2</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems />
+    </chunkInfo>
+  </chunks>
+</saveInfo>

@@ -34,6 +34,8 @@ public class networkMan : NetworkBehaviour
             GameObject objList = Instantiate(objectList, position, Quaternion.identity);
             NetworkServer.Spawn(objList);
             //Spawns object, and sets are most recently spawned object to last spawned. 
+            GameObject skyboxDir = Instantiate(skyBoxDirLight, position, Quaternion.identity);
+            NetworkServer.Spawn(skyboxDir);
             GameObject database = Instantiate(itemDatabase, position, Quaternion.identity);
             NetworkServer.Spawn(database);
             GameObject worldGenObj = Instantiate(worldGenerationObject, position, Quaternion.identity);
@@ -42,8 +44,7 @@ public class networkMan : NetworkBehaviour
             NetworkServer.Spawn(chatObj);
             GameObject sunObj = Instantiate(sunObject, position, Quaternion.identity);
             NetworkServer.Spawn(sunObj);
-            GameObject skyboxDir = Instantiate(skyBoxDirLight, position, Quaternion.identity);
-            NetworkServer.Spawn(skyboxDir);
+
         }
 
 
