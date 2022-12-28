@@ -92,6 +92,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2048314278118970462, guid: ebb1efce614546641807d3fdf9d4ea4f,
         type: 3}
+      propertyPath: hardness
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048314278118970462, guid: ebb1efce614546641807d3fdf9d4ea4f,
+        type: 3}
       propertyPath: itemName
       value: Wood Half
       objectReference: {fileID: 0}

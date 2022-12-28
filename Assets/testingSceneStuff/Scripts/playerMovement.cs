@@ -47,6 +47,7 @@ public class playerMovement : NetworkBehaviour
     public GameObject fThreeMenu;
     public GameObject seasonObject;
     public GameObject deathScreen;
+    public GameObject breakSlider;
     GameObject chatBox;
 
     public NetworkIdentity objectNetId;
@@ -62,6 +63,7 @@ public class playerMovement : NetworkBehaviour
     public bool option = false;
     public bool placingObject;
     public bool deathUI;
+    public bool leftMouseDown;
 
     public inventory playersInventory;
 
@@ -80,6 +82,7 @@ public class playerMovement : NetworkBehaviour
     public Slider hungerBar;
     public Slider thirstBar;
     public Slider healthBar;
+    public Slider objectBar;
 
     public String username;
 
@@ -156,6 +159,10 @@ public class playerMovement : NetworkBehaviour
         deathScreen = GameObject.Find("deathScreen");
         deathScreen.SetActive(false);
 
+        breakSlider = GameObject.Find("objectSlider");
+        objectBar = breakSlider.GetComponent<Slider>();
+        breakSlider.SetActive(false);
+            
 
         StartCoroutine(hungerAndThirst());
         //Start taking away hunger and thirst amounts.
@@ -526,11 +533,17 @@ public class playerMovement : NetworkBehaviour
                 {
                     if (pause == false)
                     {
+                        if (Input.GetMouseButtonUp(0)) //If we no longer click the left mouse button
+                        {
+                            leftMouseDown = false; //Then we set leftMouseDown to false. This is for our breaking IEnumerator.
+                        }
+
                         //Pick up item function.
                         if (Input.GetMouseButtonDown(0))
                         {
                             pause = true; //We add pauses here so we do not run this twice at the same time.
 
+                            leftMouseDown = true; //If we click the left mouse button, then we set leftMouseDown to true. This is for the breaking IEnumerator.
 
                             if (Physics.Raycast(cameraObject.transform.position, fwd, out hit, 15))
                             {
@@ -539,14 +552,6 @@ public class playerMovement : NetworkBehaviour
                                 itemHit = hit.transform.gameObject.GetComponent<item>();
                                 if (itemHit != null)
                                 {
-                                    itemToAdd = itemHit.itemNumber;
-                                    //Set the item hit's id to the item to add to the inventory, we then call the function which adds to inventory below this.;
-                                    CheckFirstEmptySlot();
-
-                                    playersInventory.Inventory[inSlot].id = itemHit.itemNumber;
-                                    //Set the id in our inventory Slot to the picked up Object's id (itemNumber).
-
-                                    int itemLocationNumber = itemHit.itemNumber;
                                     hitObject = hit.transform.gameObject;
                                    
                                     float x = hitObject.transform.position.x;
@@ -554,10 +559,14 @@ public class playerMovement : NetworkBehaviour
                                     Vector3 pos = hitObject.transform.position;
 
                                     Vector3 empty = new Vector3();
-                                    CmdfindObjectsChunk(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty,itemToAdd, itemHit.world);                                                                                                         
 
-                                    hit.transform.rotation = Quaternion.Euler(0, 0, 0);
-                                    //Set the item we picked up's rotation to 0,0,0 because we generate objects at random rotation and it can act funky when player tries to rotate it when that original, generated, rotation.
+                                    breakSlider.SetActive(true);
+                                    objectBar.maxValue = itemHit.hardness;
+                                    objectBar.value = objectBar.maxValue;
+                                    //Set our break slider's value to the hardness of the object we are trying to destroy.
+
+                                    StartCoroutine(breakObject(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty, itemHit.itemNumber, itemHit.world));
+                                    //Call our IEnumerator that breaks/destroys the object.
 
                                     id = 0;
                                 }
@@ -598,10 +607,8 @@ public class playerMovement : NetworkBehaviour
                                             Vector3 pos = hitObject.transform.position;
 
                                             Vector3 empty = new Vector3();
-                                            CmdfindObjectsChunk(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty, itemToAdd, itemHit.world);
 
-                                            hit.transform.rotation = Quaternion.Euler(0, 0, 0);
-                                            //Set the item we picked up's rotation to 0,0,0 because we generate objects at random rotation and it can act funky when player tries to rotate it when that original, generated, rotation.
+                                            CmdfindObjectsChunk(x, hitObject.transform.position.y, z, worldGeneratorObj, false, pos, empty, itemToAdd, itemHit.world);
 
                                             id = 0;
                                         }
@@ -636,7 +643,6 @@ public class playerMovement : NetworkBehaviour
                             position.z = (float)Math.Round((double)itemToPlace.transform.position.z, 1);
 
                             itemToPlace.transform.position = position;
-                            UnityEngine.Debug.Log(itemToPlace.transform.rotation);
 
                             Vector3 rot = itemToPlace.transform.eulerAngles;
 
@@ -695,6 +701,60 @@ public class playerMovement : NetworkBehaviour
         StartCoroutine(hungerAndThirst());
     }
 
+    public IEnumerator breakObject(float x, float y, float z, GameObject worldGenObject, bool placing, Vector3 position, Vector3 rotation, int id, bool world)
+    {
+        Vector3 empty = new Vector3();
+
+        if (leftMouseDown == true)
+        {
+            if (Physics.Raycast(cameraObject.transform.position, fwd, out hit, 15)) //If we are looking at an item.
+            {
+                itemHit = hit.transform.gameObject.GetComponent<item>();
+
+                if (itemHit.itemNumber == id && itemHit.transform.position.y == y)//and that item has the same id and y axis as the one we're breaking.
+                {
+                    breakSlider.SetActive(true); //Set the slider UI to true
+                    yield return new WaitForSeconds(1);
+                    objectBar.value = objectBar.value - 2;
+
+                    if (objectBar.value == 0 && leftMouseDown == true) //if we are still breaking the object, and hardness is now 0, and thus we have broken the object. 
+                    {
+                        itemToAdd = id;
+                        //Set the item hit's id to the item to add to the inventory, we then call the function which adds to inventory.
+                        CheckFirstEmptySlot();
+
+                        playersInventory.Inventory[inSlot].id = id;
+                        //Set the id in our inventory Slot to the picked up Object's id (itemNumber).
+
+                        breakSlider.SetActive(false); //DeActivate the slider
+
+                        CmdfindObjectsChunk(x, y, z, worldGenObject, placing, position, empty, id, world); //Find object's chunk, destroy it, save the change, etc.
+                    }
+                    else //if our slider is not yet at 0, and consequently we are still breaking the object.
+                    {
+                        StartCoroutine(breakObject(x, y, z, worldGenObject, placing, position, empty, id, world)); //recall the coroutine to continue breaking.
+                    }
+
+                }
+
+
+
+            }
+            else //if user is no longer looking at the object they were breaking
+            {
+                breakSlider.SetActive(false); //DeActivate the slider.
+                StopCoroutine(breakObject(x, y, z, worldGenObject, placing, position, empty, id, world));
+            }
+
+        }
+        else //if user is no longer holding down the left click
+        {
+            breakSlider.SetActive(false); //DeActivate the slider.
+            StopCoroutine(breakObject(x, y, z, worldGenObject, placing, position, empty, id, world));
+        }
+    }
+
+
     public void death()
     {
         characterController.enabled = false; //Disable characterController before we move player back to spawn, if we don't do this then we can't reliably.
@@ -724,6 +784,8 @@ public class playerMovement : NetworkBehaviour
         }
 
     }
+
+
 
     [Command]
     public void CmdReturnToSpawn(GameObject playerObject)
@@ -889,7 +951,6 @@ public class playerMovement : NetworkBehaviour
     public void RpcremoveItemFromChunk(GameObject chunk, Vector3 position, int id)
     {
         chunkScript script = chunk.GetComponent<chunkScript>();
-        UnityEngine.Debug.Log(chunk + " " + id + " " + position);
         GameObject obj = GameObject.Find(id + " " + position);
         script.enviornmentObjects.Remove(obj);
         Destroy(obj);

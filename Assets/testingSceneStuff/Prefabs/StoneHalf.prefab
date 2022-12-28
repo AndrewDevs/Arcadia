@@ -22,6 +22,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 241231430945281868, guid: 1dfbe9ecaf5dda0438b466036b3d72dc,
         type: 3}
+      propertyPath: hardness
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 241231430945281868, guid: 1dfbe9ecaf5dda0438b466036b3d72dc,
+        type: 3}
       propertyPath: itemNumber
       value: 16
       objectReference: {fileID: 0}

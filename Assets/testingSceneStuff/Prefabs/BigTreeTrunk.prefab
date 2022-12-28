@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 405252594081479688}
   - component: {fileID: 405252594081479691}
   - component: {fileID: 405252594081479690}
-  - component: {fileID: 405252594081479693}
   - component: {fileID: -4953126662930176326}
   - component: {fileID: 7499111438678336468}
+  - component: {fileID: 1816985241790253117}
   m_Layer: 0
   m_Name: BigTreeTrunk
   m_TagString: Untagged
@@ -99,20 +99,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &405252594081479693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405252594081479695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5aef2d30f6e44e42b8025482a0c8ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Tree Trunk
-  itemNumber: 1
 --- !u!114 &-4953126662930176326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +134,23 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &1816985241790253117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405252594081479695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac790f1e7ba86544a7e82e240b22d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Big Tree Trunk
+  itemNumber: 17
+  world: 0
+  food: 0
+  foodValue: 0
+  water: 0
+  waterValue: 0
+  hardness: 12

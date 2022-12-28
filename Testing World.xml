@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<saveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <chunks>
+    <chunkInfo>
+      <x>0</x>
+      <y>39.0524139</y>
+      <z>0</z>
+      <time>0</time>
+      <chunkType>6</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-5</x>
+          <y>40.35</y>
+          <z>-6.9</z>
+          <id>20</id>
+        </spawnedEnviornmentInfo>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-5</x>
+          <y>40.35</y>
+          <z>-6.9</z>
+          <id>20</id>
+        </spawnedEnviornmentInfo>
+      </removedEarthlyItems>
+    </chunkInfo>
+    <chunkInfo>
+      <x>0</x>
+      <y>38.4665222</y>
+      <z>-15</z>
+      <time>0</time>
+      <chunkType>6</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-6.4</x>
+          <y>39.75</y>
+          <z>-17.3</z>
+          <id>20</id>
+        </spawnedEnviornmentInfo>
+      </removedEarthlyItems>
+    </chunkInfo>
+    <chunkInfo>
+      <x>0</x>
+      <y>35.60736</y>
+      <z>-45</z>
+      <time>0</time>
+      <chunkType>6</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-6</x>
+          <y>36.85</y>
+          <z>-37.6</z>
+          <id>20</id>
+        </spawnedEnviornmentInfo>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-6</x>
+          <y>36.1</y>
+          <z>-37.6</z>
+          <id>19</id>
+        </spawnedEnviornmentInfo>
+      </removedEarthlyItems>
+    </chunkInfo>
+    <chunkInfo>
+      <x>0</x>
+      <y>39.02082</y>
+      <z>15</z>
+      <time>0</time>
+      <chunkType>6</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-4.9</x>
+          <y>40.25</y>
+          <z>19.9</z>
+          <id>20</id>
+        </spawnedEnviornmentInfo>
+      </removedEarthlyItems>
+    </chunkInfo>
+    <chunkInfo>
+      <x>0</x>
+      <y>38.3833351</y>
+      <z>30</z>
+      <time>0</time>
+      <chunkType>6</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems />
+    </chunkInfo>
+    <chunkInfo>
+      <x>0</x>
+      <y>37.29496</y>
+      <z>-30</z>
+      <time>0</time>
+      <chunkType>6</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-3.6</x>
+          <y>38.55</y>
+          <z>-23.9</z>
+          <id>20</id>
+        </spawnedEnviornmentInfo>
+        <spawnedEnviornmentInfo>
+          <deleted>false</deleted>
+          <itemName>Player(Clone)</itemName>
+          <rX>0</rX>
+          <rY>0</rY>
+          <rZ>0</rZ>
+          <x>-5.7</x>
+          <y>38</y>
+          <z>-23.3</z>
+          <id>3</id>
+        </spawnedEnviornmentInfo>
+      </removedEarthlyItems>
+    </chunkInfo>
+    <chunkInfo>
+      <x>15</x>
+      <y>39.56139</y>
+      <z>0</z>
+      <time>0</time>
+      <chunkType>6</chunkType>
+      <chunkItems />
+      <removedItems />
+      <removedEarthlyItems />
+    </chunkInfo>
+  </chunks>
+</saveInfo>

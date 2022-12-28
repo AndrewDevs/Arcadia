@@ -125,6 +125,7 @@ MonoBehaviour:
   foodValue: 0
   water: 0
   waterValue: 0
+  hardness: 4
 --- !u!114 &2529237219539826468
 MonoBehaviour:
   m_ObjectHideFlags: 0

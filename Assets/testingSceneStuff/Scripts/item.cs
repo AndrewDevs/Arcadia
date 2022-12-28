@@ -17,6 +17,8 @@ public class item : MonoBehaviour
     public bool water;
     public int waterValue;
 
+    public int hardness;
+
 
     //Database uses ints, not strings so this is changed to an int.
     bool hitByRaycast;

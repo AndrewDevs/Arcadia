@@ -935,10 +935,16 @@ public class worldGenerator : NetworkBehaviour
                 }
             }
 
+            UnityEngine.Debug.Log(exists);
+
             if (exists == false)
             {
+                UnityEngine.Debug.Log("exists again");
                 savedChunkInfo.chunks.Add(holderForSaving);
             }
+
+            UnityEngine.Debug.Log(chunkInstance.serializationObjects.Count());
+            UnityEngine.Debug.Log(chunkInstance.removeSerializationObjects.Count());
 
             XmlSerializer serializer = new XmlSerializer(typeof(saveInfo));
             //Create a XmlSerializer that takes the form of our chunkInfo class.

@@ -139,6 +139,7 @@ MonoBehaviour:
   foodValue: 2
   water: 0
   waterValue: 0
+  hardness: 2
 --- !u!65 &-6594556909300382505
 BoxCollider:
   m_ObjectHideFlags: 0

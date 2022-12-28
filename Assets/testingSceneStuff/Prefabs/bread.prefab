@@ -150,3 +150,6 @@ MonoBehaviour:
   world: 0
   food: 1
   foodValue: 15
+  water: 0
+  waterValue: 0
+  hardness: 4

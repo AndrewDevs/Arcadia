@@ -25,6 +25,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 278742258771312297, guid: 001cfe3b8e11ac240ab5494006722400,
         type: 3}
+      propertyPath: hardness
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 278742258771312297, guid: 001cfe3b8e11ac240ab5494006722400,
+        type: 3}
       propertyPath: itemName
       value: Bush Stalk
       objectReference: {fileID: 0}
